@@ -1,0 +1,49 @@
+<div class="container">
+  <form [formGroup]="registerForm" class="form" (submit)="registerUser()">
+    <div class="error-wrap" *ngIf="error$ | async">
+      <p class="error-text"><mat-icon>cancel</mat-icon>{{ error$ | async }}</p>
+    </div>
+    <div class="form-wrap">
+      <legend>Register</legend>
+      <div class="formfeilds-wrap">
+        <fieldset class="feildset">
+            <label>Email</label>
+          <input
+            formControlName="email"
+            class="input"
+            type="email"
+            placeholder="Enter your email..."
+          />
+        </fieldset>
+      </div>
+      <div class="formfeilds-wrap">
+        <fieldset class="feildset">
+            <label>Password</label>
+          <input
+            formControlName="password"
+            class="input"
+            [type]="show ? 'text' : 'password'"
+            placeholder="Enter your password..."
+          />
+          <span *ngIf="registerForm.value.password" class="span" (click)="showPassword()"
+            ><mat-icon>{{
+              show ? "visibility" : "visibility_off"
+            }}</mat-icon></span
+          >
+        </fieldset>
+      </div>
+      <div class="btn-wrap">
+        @if(loading$ | async) {
+        <mat-spinner class="spinner" color="warn"></mat-spinner>
+        } @else {
+        <button [disabled]="!registerForm.valid" class="btn submit-btn">
+          Register
+        </button>
+        }
+      </div>
+    </div>
+  </form>
+  <div class="redirect-wrap">
+    <p class="redirect-text" >Already Signed-up? <a class="redirect-link" routerLink="/login">Login</a></p>
+  </div>
+</div>

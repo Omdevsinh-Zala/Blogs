@@ -1,1 +1,106 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$ngrx-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($ngrx-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($ngrx-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($ngrx-theme);
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.container {
+  max-width: 1680px;
+  display: block;
+  margin: 0 auto;
+}
+.btn {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 25px;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
+  &:hover:disabled {
+    cursor: not-allowed;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+.error-wrap {
+  position: absolute;
+  background-color: white;
+  top: 10px;
+  right: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.407);
+  padding: 15px 10px;
+  border-radius: 4px;
+  color: red;
+  width: fit-content;
+  font-size: 16px;
+  .error-text {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    mat-icon {
+      scale: 0.9;
+    }
+
+    &::after {
+      content: "";
+      height: 2px;
+      background-color: red;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      animation: fill 3s linear;
+    }
+  }
+}
+@keyframes fill {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

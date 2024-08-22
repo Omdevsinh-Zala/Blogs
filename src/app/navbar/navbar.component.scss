@@ -1,0 +1,72 @@
+.navbar {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  .first-wrap {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .second-wrap {
+    width: 50%;
+    position: relative;
+    .user-info-wrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      gap: 10px;
+      align-items: center;
+
+      .user-icon {
+        display: flex;
+        align-items: center;
+
+        .avatar-image {
+        height: 40px;
+        width: 40px;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .account-setting-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      margin-top: 10px;
+      gap: 8px;
+      position: absolute;
+      right: 0;
+      background-color: aliceblue;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+      .inner-setting {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .hr {
+        width: 90px;
+      }
+    }
+    .account-wrap {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      justify-content: right;
+      align-items: center;
+    }
+  }
+}

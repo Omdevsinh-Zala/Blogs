@@ -1,0 +1,10 @@
+<div class="container">
+    <div *ngIf="(loading$ | async)">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="cards-wrap">
+        @for(post of (posts$ | async);track post.id) {
+            <app-card [post]="post" (click)="addPost(post)" ></app-card>
+        }
+    </div>
+</div>
