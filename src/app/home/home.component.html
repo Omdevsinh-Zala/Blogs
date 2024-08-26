@@ -1,0 +1,13 @@
+<div class="container">
+    <div *ngIf="(loading$ | async)" class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="cards-wrap">
+        @for(post of (posts$ | async);track post.id) {
+            <app-card [post]="post" (click)="addPost(post)" ></app-card>
+        }
+    </div>
+    <!-- <div class="showMore-wrap">
+        <button class="btn showMore-btn" (click)="showMore()">Show More</button>
+    </div> -->
+</div>

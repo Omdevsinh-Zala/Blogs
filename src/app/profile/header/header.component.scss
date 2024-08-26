@@ -1,0 +1,167 @@
+// card-header start
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 2px 5px 5px rgba(192, 192, 192, 0.247);
+    padding: 15px;
+    .user-avatar-wrap {
+      position: relative;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .user-avatar {
+        height: 180px;
+        width: 180px;
+        margin-top: -32%;
+        background-color: whitesmoke;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .avatar {
+          height: 150px;
+          width: 150px;
+        }
+      }
+    }
+    //   card-avatar end
+    //   card-title start
+    .card-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .user-title {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        .first-name-wrap,
+        .last-name-wrap {
+          font-size: 28px;
+          font-weight: 600;
+        }
+      }
+    }
+    /*card-title end
+  card-bio statr*/
+    .card-bio {
+      display: flex;
+      justify-content: center;
+      .user-bio {
+        max-width: 80%;
+        text-align: center;
+        .bio {
+          font-size: 20px;
+          font-weight: 300;
+          line-height: 24px;
+        }
+      }
+    }
+    //   card-bio end
+    //   car-skills start
+    .card-skills {
+      display: flex;
+      justify-content: center;
+      .user-skills {
+        max-width: 60%;
+        text-align: center;
+        .skills {
+          font-size: 20px;
+          font-weight: 300;
+          line-height: 24px;
+        }
+      }
+    }
+    // card-skills end
+    // card-info statr
+    .card-info {
+      display: flex;
+      justify-content: center;
+      .user-info {
+        max-width: 70%;
+        .info-wrap {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 20px;
+          .location-info,
+          .joined-info,
+          .workEmail-info,
+          .profile-links-wrap {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+          }
+          .profile-links-wrap {
+            .github-link,
+            .twitter-link,
+            .facebook-link,
+            .instagram-link {
+              display: flex;
+              flex-direction: row;
+              gap: 8px;
+              align-items: center;
+              svg {
+                opacity: 0.6;
+              }
+            }
+            .github-link {
+              &:hover {
+                svg {
+                  fill: black;
+                  opacity: 1;
+                }
+              }
+            }
+            .twitter-link {
+              &:hover {
+                svg {
+                  fill: black;
+                  opacity: 1;
+                }
+              }
+            }
+            .facebook-link {
+              &:hover {
+                svg {
+                  fill: rgb(58, 116, 243);
+                  opacity: 1;
+                }
+              }
+            }
+            .instagram-link {
+              &:hover {
+                svg {
+                  fill: pink;
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    //   card-info end
+    //   card-work start
+    .card-work {
+      display: flex;
+      justify-content: center;
+      .user-work {
+        max-width: 70%;
+        text-align: center;
+        font-weight: 500;
+        font-style: italic;
+        .work {
+          font-size: 20px;
+          font-weight: 300;
+          line-height: 24px;
+          font-style: normal;
+        }
+      }
+    }
+  }

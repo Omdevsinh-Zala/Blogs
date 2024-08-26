@@ -1,0 +1,55 @@
+<div class="container">
+  <form class="form" [formGroup]="loginGroup" (submit)="login()">
+    <div class="form-wrap">
+      <legend>Login</legend>
+      <div class="formfeild-wrap">
+        <fieldset class="feildset">
+          <label class="label">Email</label>
+          <input
+            class="input"
+            formControlName="email"
+            type="email"
+            placeholder="Enter your email..."
+          />
+        </fieldset>
+      </div>
+      <div class="formfeild-wrap">
+        <fieldset class="feildset">
+          <label class="label">Password</label>
+          <input
+            formControlName="password"
+            class="input"
+            [type]="show ? 'text' : 'password'"
+            placeholder="Enter your password..."
+          />
+          <span
+            *ngIf="loginGroup.value.password"
+            class="span"
+            (click)="showPassword()"
+            ><mat-icon>{{
+              show ? "visibility" : "visibility_off"
+            }}</mat-icon></span
+          >
+          <div class="forget-wrap">
+            <a class="forget-link" routerLink="/change-password">Forget password?</a>
+          </div>
+        </fieldset>
+      </div>
+      <div class="btn-wrap">
+        @if(loading$ | async) {
+        <mat-spinner class="spinner" color="warn"></mat-spinner>
+        } @else {
+        <button [disabled]="!loginGroup.valid" class="btn submit-btn">
+          Login
+        </button>
+        }
+      </div>
+    </div>
+  </form>
+  <div class="redirect-wrap">
+    <p class="redirect-text">
+      Not Signed-up?
+      <a class="redirect-link" routerLink="/register">create account</a>
+    </p>
+  </div>
+</div>

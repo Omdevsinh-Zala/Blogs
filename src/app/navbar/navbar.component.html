@@ -1,0 +1,51 @@
+<header>
+    <div class="container">
+        <nav class="navbar" #navbar>
+            <div class="first-wrap">
+                <div class="logo">
+                    Blogs
+                </div>
+                <div class="search-wrap">
+                    <input type="search" placeholder="search here...">
+                </div>
+            </div>
+            <div class="second-wrap">
+                @if(user$ | async) {
+                    <div class="user-info-wrap" (click)="showOptions()">
+                        <div class="user-name">
+                            {{(user$ | async)?(user$ | async)?.displayName:'Guest'}}
+                        </div>
+                        <div class="user-icon">
+                            @if((user$ | async)?.photoURL) {
+                                <img class="avatar-image" [src]="(user$ | async)?.photoURL">
+                            } @else {
+                                <mat-icon>account_circle</mat-icon>
+                            }
+                        </div>
+                    </div>
+                    <div *ngIf="options" class="account-setting-wrap">
+                        <div class="inner-setting" (click)="profile()" *ngIf="url != userName">
+                            Profile <mat-icon>settings</mat-icon>
+                        </div><hr class="hr" *ngIf="url == (user$ | async)?.displayName">
+                        <div class="inner-setting" (click)="logout()">
+                            Logout <mat-icon>exit_to_app</mat-icon>
+                        </div>
+                    </div>
+                } @else {
+                    <div class="account-wrap">
+                        <div class="login-wrap">
+                            <a routerLink="/login" class="btn login-btn">
+                                Login
+                            </a>
+                        </div>
+                        <div class="register-wrap">
+                            <a routerLink="/register" class="btn register-btn">
+                                Create account
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,19 @@
+.container {
+  background-color: whitesmoke;
+  max-width: 100%;
+  .card {
+    display: block;
+    margin: 3% auto;
+    max-width: 1200px;
+    padding: 20px;
+    .card-content-wrap {
+        display: flex;
+        flex-direction: row;
+        margin: 0 -12px;
+        .extra-wrap, .content-wrap {
+            width: 50%;
+            padding: 12px;
+        }
+    }
+  }
+}

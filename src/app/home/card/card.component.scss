@@ -1,0 +1,101 @@
+.card {
+  max-width: 100%;
+  .avatar {
+    background-size: cover;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: start;
+    margin: 8px 64px;
+    .title-wrap {
+      font-size: 38px;
+    }
+    .tag-wrap {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      font-size: 18px;
+      .tag {
+        font-size: 17px;
+        padding: 6px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        &.red {
+          &:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.3);
+          }
+          span {
+            color: rgba(255, 0, 0, 0.481);
+          }
+        }
+        &.blue {
+          &:hover {
+            background-color: rgba(0, 0, 255, 0.1);
+            border-color: rgba(0, 0, 255, 0.3);
+          }
+          span {
+            color: rgba(0, 0, 255, 0.423);
+          }
+        }
+        &.yellow {
+          &:hover {
+            background-color: rgba(255, 255, 0, 0.1);
+            border-color: rgba(255, 255, 0, 0.3);
+          }
+          span {
+            color: rgba(255, 255, 0, 0.472);
+          }
+        }
+        &.green {
+          &:hover {
+            background-color: rgba(0, 128, 0, 0.1);
+            border-color: rgba(0, 128, 0, 0.3);
+          }
+          span {
+            color: rgba(0, 128, 0, 0.481);
+          }
+        }
+        &.purple {
+          &:hover {
+            background-color: rgba(128, 0, 128, 0.1);
+            border-color: rgba(128, 0, 128, 0.3);
+          }
+          span {
+            color: rgba(128, 0, 128, 0.481);
+          }
+        }
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 54px;
+    .reaction-wrap {
+      display: flex;
+      justify-content: left;
+      gap: 12px;
+      .like-wrap,
+      .dislike-wrap {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        &:hover {
+            cursor: pointer;
+        }
+      }
+    }
+    .view-wrap {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+  }
+}

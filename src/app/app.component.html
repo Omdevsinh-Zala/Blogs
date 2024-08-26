@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<div class="error-wrap" *ngIf="error$ | async">
+    <p class="error-text">
+      <mat-icon>cancel</mat-icon>{{ error$ | async }}
+    </p>
+  </div>
+<router-outlet></router-outlet>

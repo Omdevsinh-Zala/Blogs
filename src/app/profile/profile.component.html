@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card">
+    <app-header [databaseUser$]="databaseUser$" ></app-header>
+    <div class="card-content-wrap">
+        <div class="extra-wrap">
+            <app-card-extra [databaseUser$]="databaseUser$"></app-card-extra>
+        </div>
+        <div class="content-wrap">
+            <app-card-content [databaseUser$]="databaseUser$"></app-card-content>
+        </div>
+    </div>
+  </div>
+</div>
