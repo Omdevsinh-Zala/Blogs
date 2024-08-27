@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UserService } from '../services/user/user.service';
@@ -8,11 +8,12 @@ import { UserService } from '../services/user/user.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('navbar') hide!: ElementRef;
   @ViewChild('profileHide') opton!: ElementRef;
   constructor(private router: Router, private user: UserService) {}
   user$ = this.user.currentUser$
+  currentUser = this.user.currentUserRef$
   currentUser$ = this.user.currentUserRef$
   options:boolean = false;
   userName:string = ''
@@ -20,17 +21,17 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.router.events.subscribe((x) => {
       if (x instanceof NavigationEnd) {
         let page = x.url;
-        if (page == '/login' || page == '/register' || page == '/change-password' || page == '/change-profile') {
+        if (page == '/login' || page == '/register' || page == '/change-password' || page == '/update-profile') {
           this.hide.nativeElement.style.display = 'none';
         } else {
           this.hide.nativeElement.style.display = 'flex';
         }
       }
     });
-    this.user$.subscribe({
+    this.currentUser$.subscribe({
       next:(data) => {
         if(data) {
-          this.userName = data.displayName!
+          this.userName = '/' + data.uniqueName!
         }
       }
     })
@@ -38,18 +39,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   url:string = ''
 
-  ngAfterViewInit(): void {
-    // this.hideProfile()
-  }
-
   showOptions() {
-    this.user$.subscribe({
-      next:(data) => {
-        if(data) {
-          this.userName = '/' + data.displayName!
-        }
-      }
-    })
     this.hideProfile()
     this.options = !this.options
   }
@@ -65,7 +55,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   profile() {
     this.currentUser$.subscribe({
       next:(data) => {
-        this.router.navigateByUrl(`${data?.uniqueName}`)
+        console.log(data)
+        this.router.navigateByUrl(`/${data?.uniqueName}`)
         this.options = !this.options
       }
     })
@@ -77,5 +68,19 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   hideProfile() {
     this.url = this.router.url
+  }
+
+  updateProfile() {
+    this.currentUser$.subscribe({
+      next:(data) => {
+        this.router.navigateByUrl(`/update-profile`)
+        this.options = !this.options
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.options = !this.options
+    console.log('Destroy')
   }
 }

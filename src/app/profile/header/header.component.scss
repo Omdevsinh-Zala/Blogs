@@ -96,9 +96,7 @@
             flex-direction: row;
             gap: 8px;
             align-items: center;
-          }
-          .profile-links-wrap {
-            .github-link,
+            .gitHub-link,
             .twitter-link,
             .facebook-link,
             .instagram-link {
@@ -106,11 +104,18 @@
               flex-direction: row;
               gap: 8px;
               align-items: center;
+              .link {
+                text-decoration: none;
+                color: black;
+              }
+              &:hover {
+                cursor: pointer;
+              }
               svg {
                 opacity: 0.6;
               }
             }
-            .github-link {
+            .gitHub-link {
               &:hover {
                 svg {
                   fill: black;
@@ -137,7 +142,7 @@
             .instagram-link {
               &:hover {
                 svg {
-                  fill: pink;
+                  fill: rgb(240, 115, 200);
                   opacity: 1;
                 }
               }
@@ -164,4 +169,8 @@
         }
       }
     }
+  }
+  .profile-links-wrap {
+    justify-content: space-evenly;
+    width: 100%;
   }

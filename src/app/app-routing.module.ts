@@ -7,6 +7,7 @@ import { ForgetPasswordComponent } from './forms/forget-password/forget-password
 import { updateGuard } from './routeGuard/updatePassword/update.guard';
 import { TitleService } from './services/resolver/title.service';
 import { ChangeProfileComponent } from './forms/change-profile/change-profile.component';
+import { updateProfileGuard } from './routeGuard/updateProfile/update-profile.guard';
 
 const routes: Routes = [
   {
@@ -28,10 +29,10 @@ const routes: Routes = [
     canActivate: [updateGuard],
   },
   {
-    path: 'change-profile',
+    path: 'update-profile',
     component: ChangeProfileComponent,
     title: 'Change Profile',
-    canActivate: [updateGuard],
+    canActivate: [updateProfileGuard],
   },
   {
     path: '',
@@ -48,7 +49,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
     title: TitleService,
-    canActivate:[updateGuard]
   },
 ];
 

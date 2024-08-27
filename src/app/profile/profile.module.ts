@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { CardContentComponent } from './card-content/card-content.component';
 import { CardExtraComponent } from './card-extra/card-extra.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CardExtraComponent } from './card-extra/card-extra.component';
     ProfileRoutingModule,
     MatCardModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinner
   ]
 })
 export class ProfileModule { }

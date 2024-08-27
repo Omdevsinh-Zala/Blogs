@@ -26,7 +26,10 @@
                     <div *ngIf="options" class="account-setting-wrap">
                         <div class="inner-setting" (click)="profile()" *ngIf="url != userName">
                             Profile <mat-icon>settings</mat-icon>
-                        </div><hr class="hr" *ngIf="url == (user$ | async)?.displayName">
+                        </div><hr class="hr" *ngIf="url != userName"> 
+                        <div class="inner-setting" (click)="updateProfile()" *ngIf="url == userName">
+                            Update Profile <mat-icon>settings</mat-icon>
+                        </div><hr class="hr" *ngIf="url == userName"> 
                         <div class="inner-setting" (click)="logout()">
                             Logout <mat-icon>exit_to_app</mat-icon>
                         </div>

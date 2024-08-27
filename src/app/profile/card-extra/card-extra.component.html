@@ -1,3 +1,16 @@
 <div class="user-extra">
-    extra
+    <div class="user-languages">
+        <div class="title-wrap">
+            Skills/Languages
+        </div>
+        <div *ngIf="(databaseUser$ | async)?.language" class="language-wrap">
+            <ul class="language-list">
+                @for (language of (databaseUser$ | async)?.language?.split(','); track $index) {
+                    <li class="language">
+                        {{ language }}
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>

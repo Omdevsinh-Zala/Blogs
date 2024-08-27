@@ -8,18 +8,21 @@ import {
 } from 'firebase/auth';
 import { Observable, ReplaySubject, from, of } from 'rxjs';
 import { LoginUser } from '../../models/login-user';
-import { Database, limitToFirst, onValue, push } from '@angular/fire/database';
-import { query, ref, set } from 'firebase/database';
+import { Database, limitToFirst, onValue, push, update } from '@angular/fire/database';
+import { child, query, ref, set } from 'firebase/database';
 import { Router } from '@angular/router';
 import { Users } from '../../models/users';
 import { Store } from '@ngrx/store';
 import { loginActions } from '../../store/app.actions';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.development';
+import { UpdateUser } from '../../models/updateUser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private firebaseAuth: Auth, private router: Router, private store:Store) {
+  constructor(private firebaseAuth: Auth, private router: Router, private http:HttpClient) {
     this.setUser();
   }
   private currentUser = user(this.firebaseAuth);
@@ -31,6 +34,7 @@ export class UserService {
   currentUserRef$ = this.currentUserRef.asObservable();
   private userProfile = new ReplaySubject<Users | null>(1);
   userProfile$ = this.userProfile.asObservable()
+  currentUserData!:Users
 
   setUser() {
     this.currentUser.subscribe({
@@ -109,10 +113,10 @@ export class UserService {
     return from(promise);
   }
 
+  //Registering user in database
   firebaseUserRegister(data: LoginUser, imageUrl: string) {
     const date = new Date();
     const newUserRef = push(this.userRef);
-    console.log(date.getTime());
     const newUser: Users = {
       accountCreated: date.getTime(),
       bio: '',
@@ -120,22 +124,22 @@ export class UserService {
       firstName: data.email.split('@')[0],
       id: newUserRef.key as unknown as number,
       image: imageUrl,
-      language: [''],
+      language: '',
       lastName: '',
       uniqueName: data.uniqueName,
       learning: '',
       location: '',
       password: data.password,
       skills: '',
-      socialLinks: [{ gitHub: '', facbook: '', twitter: '', instagram: '' }],
+      socialLinks: [{ gitHub: '', facebook: '', twitter: '', instagram: '' }],
       work: '',
       workEmail: '',
     };
     set(newUserRef, newUser);
   }
 
+  //For getting data on profile page
   setUserProfile() {
-    this.userProfile.next(null);
     const userData = query(this.userRef);
     onValue(userData, (snapshot) => {
       const user: { [key: string]: Users } = snapshot.val();
@@ -144,8 +148,10 @@ export class UserService {
       const currentUser = users.filter((user) => user.uniqueName == name);
       this.userProfile.next(currentUser[0]);
     });
+    return of(null)
   }
 
+  //To set current user data
   setCurrentUser(data: User | null) {
     if (data) {
       const userData = query(this.userRef);
@@ -154,9 +160,20 @@ export class UserService {
         const users = Object.values(user);
         const currentUser = users.filter((user) => user.email == data.email);
         this.currentUserRef.next(currentUser[0]);
+        this.currentUserData = currentUser[0]
       });
     } else {
       this.currentUserRef.next(null);
     }
+  }
+
+  //For duplicate uniqueName check
+  uniqueNameService() {
+    return this.http.get<{[key:string]:Users}>(`${environment.firebaseConfig.databaseURL}` + '/users.json')
+  }
+
+  //Update user data
+  firebaseUpdateUser(user:Users , data: UpdateUser) {
+    return this.http.patch(environment.firebaseConfig.databaseURL + `/users/${user.id}.json`, data)
   }
 }

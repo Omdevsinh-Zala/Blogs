@@ -24,6 +24,8 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from '../environments/environment.development';
 import { ChangeProfileComponent } from './forms/change-profile/change-profile.component';
+import { ProfileEffrects } from './profile/store/profile.effects';
+import { ProfileKey, profileReducer } from './profile/store/profile.reducer';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { ChangeProfileComponent } from './forms/change-profile/change-profile.co
     MatProgressSpinner,
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature(LoginKey, LoginReducer),
-    EffectsModule.forRoot([LoginEffect]),
+    StoreModule.forFeature(ProfileKey, profileReducer),
+    EffectsModule.forRoot([LoginEffect, ProfileEffrects]),
   ],
   providers: [
     provideAnimationsAsync(),

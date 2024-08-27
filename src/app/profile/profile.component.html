@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="card">
+  <div *ngIf="loading$ | async" class="loading-wrap">
+  <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!(loading$ | async)" class="card">
     <app-header [databaseUser$]="databaseUser$" ></app-header>
     <div class="card-content-wrap">
         <div class="extra-wrap">

@@ -14,12 +14,12 @@ export interface Users {
   workEmail: string;
   socialLinks: SocilaLinks[]
   learning:string,
-  language:string[]
+  language:string
 }
 
 export interface SocilaLinks {
     gitHub:string,
-    facbook: string,
+    facebook: string,
     instagram: string,
     twitter: string
   }

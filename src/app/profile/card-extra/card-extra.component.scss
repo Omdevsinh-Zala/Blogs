@@ -4,4 +4,29 @@
     border-radius: 12px;
     box-shadow: 2px 5px 5px rgba(192, 192, 192, 0.247);
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    .user-languages {
+        border: 1px solid rgba(89, 89, 89, 0.411);
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        .title-wrap {
+            padding: 10px;
+            font-weight: 500;
+            width: 100%;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(89, 89, 89, 0.411);
+        }
+        .language-wrap {
+            .language-list {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                list-style: none;
+                gap: 20px;
+                padding: 12px;
+            }
+        }
+    }
 }

@@ -38,20 +38,18 @@ export class RegisterComponent {
       uniqueName: this.registerForm.value.uniqueName!.toLowerCase().trim()
     }
     if(userData.email && userData.password) {
-      const userQuery = query(this.service.userRef)
-    onValue(userQuery, (snapshot) => {
-      const user: { [key: string]: Users } = snapshot.val();
-        const users = Object.values(user);
-        console.log(users)
-        const userFilter = users.filter((user) => user.uniqueName == userData.uniqueName)
-        console.log(userFilter)
-        if(userFilter.length == 0) {
-          this.registerStore.register(userData);
-          this.clear.cleareError()
-        } else {
-          this.store.dispatch(loginActions.faliure({error: 'Unique name already taken'}))
+      this.service.uniqueNameService().subscribe({
+        next:(data) => {
+          const usersData = Object.values(data)
+          const userFilter = usersData.filter((user) => user.uniqueName == userData.uniqueName)
+          if(userFilter.length == 0) {
+                  this.registerStore.register(userData);
+                } else {
+                  this.store.dispatch(loginActions.faliure({error: 'Unique name already taken'}))
+                  this.clear.cleareError()
+                }
         }
-    })
+      })
     }
   }
 }
