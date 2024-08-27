@@ -11,4 +11,5 @@ export interface UpdateUser {
   socialLinks: SocilaLinks[]
   learning:string,
   language:string
+  image?:string
 } 

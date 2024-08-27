@@ -125,3 +125,55 @@
     }
   }
 }
+.tenth-wrap {
+    position: absolute;
+    top: 3%;
+    right: 28%;
+  .image-wrap {
+    .img {
+      width: 150px;
+      height: 150px;
+    }
+}
+.icon-wrap {
+    position: absolute;
+    width: 100%;
+    bottom: 2px;
+    display: grid;
+    place-items: center;
+    background-color: white;
+    border-radius: 100%;
+    padding: 5px;
+    &:hover {
+        mat-icon {
+            cursor: pointer;
+            transform: rotate(90deg);
+            transition: all 0.3s linear;
+        }
+    }
+}
+}
+.images-wrap {
+    position: absolute;
+    top: 28%;
+    right: 21%;
+    .images-list {
+        width: 270px;
+        background-color: #282828;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 10px;
+        .images {
+            list-style: none;
+            .image {
+                height: 50px;
+                width: 50px;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

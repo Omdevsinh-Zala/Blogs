@@ -148,7 +148,24 @@
                         <button class="btn update-btn" (click)="updateProfile()" >Update</button>
                     </div>
                 </div>
+                <div class="tenth-wrap">
+                    <div class="image-wrap">
+                        <img class="img" [src]="(user$ | async)?.image" #img />
+                    </div>
+                    <div class="icon-wrap">
+                        <mat-icon (click)="showImages()" >camera</mat-icon>
+                    </div>
+                </div>
             </div>
         </form>
+    </div>
+    <div *ngIf="options" class="images-wrap">
+        <ul class="images-list">
+            @for (image of images; track image) {
+                <li class="images">
+                    <img src="{{image}}" class="image" (click)="selectImage(image)"/>
+                </li>
+            }
+        </ul>
     </div>
 </div>

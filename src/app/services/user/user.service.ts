@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, updatePassword, user } from '@angular/fire/auth';
+import { Auth, getAuth, updateCurrentUser, updatePassword, user } from '@angular/fire/auth';
 import {
   User,
   createUserWithEmailAndPassword,
@@ -175,5 +175,12 @@ export class UserService {
   //Update user data
   firebaseUpdateUser(user:Users , data: UpdateUser) {
     return this.http.patch(environment.firebaseConfig.databaseURL + `/users/${user.id}.json`, data)
+  }
+
+  //Update image
+  auth = getAuth()
+  updateUserImage(data:string) {
+    let promise = updateCurrentUser(this.auth, this.firebaseAuth.currentUser).then((res) => updateProfile(this.firebaseAuth.currentUser!, {photoURL: data}))
+    return from(promise)
   }
 }

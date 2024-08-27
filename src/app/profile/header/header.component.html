@@ -69,7 +69,7 @@
         </div>
         <div class="profile-links-wrap">
           @if((databaseUser$ | async)) { @for(links of (databaseUser$ |
-          async)?.socialLinks; track links) {
+          async)?.socialLinks; track $index) {
           <div class="gitHub-link" *ngIf="links.gitHub">
             <svg
               xmlns="http://www.w3.org/2000/svg"

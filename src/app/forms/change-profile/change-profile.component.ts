@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { SocilaLinks, Users } from '../../models/users';
@@ -21,6 +21,22 @@ export class ChangeProfileComponent implements OnInit {
     private error: ClearErrorService
   ) {}
   user!: Users;
+  user$ = this.service.currentUserRef$;
+  options: boolean = false;
+  images: string[] = [
+    'assets/images/boy.png',
+    'assets/images/cat.png',
+    'assets/images/gamer.png',
+    'assets/images/man (1).png',
+    'assets/images/man (2).png',
+    'assets/images/man (3).png',
+    'assets/images/man (4).png',
+    'assets/images/man.png',
+    'assets/images/woman (1).png',
+    'assets/images/woman.png',
+  ];
+  selectedImage:string = ''
+  @ViewChild('img') img!:ElementRef
 
   ngOnInit(): void {
     this.service.currentUserRef$.subscribe({
@@ -84,7 +100,7 @@ export class ChangeProfileComponent implements OnInit {
       },
     ];
 
-    const userData: UpdateUser = {
+    let userData: UpdateUser = {
       firstName: this.userProfile.getRawValue().firstName?.trim()!,
       lastName: this.userProfile.getRawValue().lastName?.trim()!,
       bio: this.userProfile.getRawValue().bio?.trim()!,
@@ -97,8 +113,17 @@ export class ChangeProfileComponent implements OnInit {
       socialLinks: socialLinks,
     };
 
+    if(this.selectedImage) {
+      userData = {
+        ...userData,
+        image: this.selectedImage
+      }
+    }
     if (userData.language && userData.language.includes(',')) {
       this.service.firebaseUpdateUser(this.user, userData).subscribe();
+      if(this.selectedImage) {
+        this.service.updateUserImage(this.selectedImage)
+      }
       this.service.currentUserRef$.subscribe({
         next: (data) => {
           this.router.navigateByUrl(`${data?.uniqueName}`);
@@ -110,5 +135,14 @@ export class ChangeProfileComponent implements OnInit {
       );
       this.error.cleareError();
     }
+  }
+
+  showImages() {
+    this.options = !this.options
+  }
+
+  selectImage(data: string) {
+    this.selectedImage = data
+    this.img.nativeElement.src = data
   }
 }
