@@ -1,0 +1,142 @@
+@import "ckeditor5/ckeditor5.css";
+.close-btn {
+  font-size: 16px;
+  color: white;
+  background-color: rgba(0, 128, 0, 0.637);
+  border-color: white;
+  &:hover {
+    outline: 2px solid rgba(0, 128, 0, 0.637);
+    outline-offset: 2px;
+  }
+}
+::ng-deep .cdk-overlay-pane,
+.mat-mdc-dialog-panel {
+  max-width: 100% !important;
+}
+::ng-deep .ck,
+.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  border: none !important;
+  background-color: transparent !important;
+}
+::ng-deep .artical-start {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+::ng-deep h1 {
+  display: block;
+  font-size: 30px;
+  line-height: 28px;
+  font-weight: 600;
+  padding: 10px 0;
+}
+::ng-deep h2 {
+  display: block;
+  font-size: 26px;
+  line-height: 26px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+::ng-deep h3 {
+  display: block;
+  font-size: 23px;
+  line-height: 24px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+::ng-deep h4 {
+  display: block;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+::ng-deep p {
+  display: block;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 10px 0;
+}
+::ng-deep ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  list-style: none;
+  margin: 0 -5px;
+}
+::ng-deep ol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0 -5px;
+}
+::ng-deep li {
+  padding: 5px;
+}
+::ng-deep img {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%;
+  height: auto;
+}
+.tag-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  font-size: 18px;
+  .tag {
+    font-size: 17px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    &.red {
+      &:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+        border-color: rgba(255, 0, 0, 0.3);
+      }
+      span {
+        color: rgba(255, 0, 0, 0.481);
+      }
+    }
+    &.blue {
+      &:hover {
+        background-color: rgba(0, 0, 255, 0.1);
+        border-color: rgba(0, 0, 255, 0.3);
+      }
+      span {
+        color: rgba(0, 0, 255, 0.423);
+      }
+    }
+    &.yellow {
+      &:hover {
+        background-color: rgba(255, 255, 0, 0.1);
+        border-color: rgba(255, 255, 0, 0.3);
+      }
+      span {
+        color: rgba(255, 255, 0, 0.472);
+      }
+    }
+    &.green {
+      &:hover {
+        background-color: rgba(0, 128, 0, 0.1);
+        border-color: rgba(0, 128, 0, 0.3);
+      }
+      span {
+        color: rgba(0, 128, 0, 0.481);
+      }
+    }
+    &.purple {
+      &:hover {
+        background-color: rgba(128, 0, 128, 0.1);
+        border-color: rgba(128, 0, 128, 0.3);
+      }
+      span {
+        color: rgba(128, 0, 128, 0.481);
+      }
+    }
+  }
+}
+::ng-deep .cdk-overlay-dark-backdrop {
+  background: aliceblue;
+}

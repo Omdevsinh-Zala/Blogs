@@ -15,6 +15,7 @@ export interface Users {
   socialLinks: SocilaLinks[]
   learning:string,
   language:string
+  posts:{userPosts:string}
 }
 
 export interface SocilaLinks {

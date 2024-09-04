@@ -1,15 +1,20 @@
 import { createFeature, createReducer, on } from "@ngrx/store"
 import { profileActions } from "./profile.actions"
+import { Posts } from "../../models/posts"
 
 
 interface InitialState {
     loading: boolean
-    error: string
+    error: string,
+    postLoadig: boolean,
+    userPosts: Posts[] | null
 }
 
 const initialstate:InitialState = {
     loading: false,
-    error: ''
+    error: '',
+    postLoadig: false,
+    userPosts: null
 }
 
 const profileFeature = createFeature({

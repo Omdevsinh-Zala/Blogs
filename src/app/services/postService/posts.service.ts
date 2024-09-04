@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Posts } from '../../models/posts';
 import { Database, limitToFirst, ref, set } from '@angular/fire/database';
-import { onValue, push, query } from 'firebase/database';
-import { Auth } from '@angular/fire/auth';
+import { equalTo, onValue, push, query } from 'firebase/database';
+import { Auth, getAuth } from '@angular/fire/auth';
 import { Observable, of, ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -20,6 +20,7 @@ export class PostsService {
   private data = new ReplaySubject<{[key:string]:Posts}>()
   limit:number = 10;
   data$ = this.data.asObservable()
+  authenticate = getAuth()
 
   getAllPosts():Observable<{[key:string]:Posts}> {
     const data = query(this.postRef, limitToFirst(10))

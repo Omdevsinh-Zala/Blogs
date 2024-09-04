@@ -1,3 +1,21 @@
 <div class="user-content">
-    content
+    <div class="blogs-wrap">
+        <div class="title-wrap">
+            Your blog's
+            <button (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
+        </div>
+        <div class="blogs-list-wrap">
+            <ul class="blogs-list">
+                @for (post of posts; track posts) {
+                    <li class="blogs">
+                        <app-card [post]="post" ></app-card>
+                    </li>
+                } @empty {
+                    <div class="empty-wrap">
+                        <p>No blogs at this moment!</p>
+                    </div>
+                }
+            </ul>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,31 @@
+<div class="container">
+    <form class="form" [formGroup]="form">
+        <fieldset class="fieldset">
+            <input formControlName="title" id="title" type="text" class="input" placeholder="Enter title here..." />
+        </fieldset>
+        <ckeditor #editor [editor]="Editor" formControlName="content" [config]="config"></ckeditor>
+        <mat-chip-set class="tags-list" *ngIf="tagsArray">
+            @for (tags of tagsArray; track tags) {
+                <mat-chip  > {{tags}} 
+                    <button matChipRemove (click)="refreshChips(tags)"><mat-icon>cancel</mat-icon></button>
+                </mat-chip>
+            }
+        </mat-chip-set>
+        <form class="tagForm" [formGroup]="tags">
+            <fieldset class="fieldset">
+                <input type="text" formControlName="tag" id="tag" class="input" placeholder="Enter related tags here...">
+                <button class="btn tags-btn" [disabled]="!tags.valid" (click)="addTag()">Add Tag</button>
+            </fieldset>
+        </form>
+        <div class="btn-wrap">
+            <button (click)="uploadBlog()" [disabled]="!form.valid || (tagsArray.length == 0)" class="btn submit-btn">
+                @if (loading$ | async) {
+                    <mat-spinner class="spinner"></mat-spinner>
+                } @else {
+                    Submit
+                }
+            </button>
+            <button (click)="previewBlog()" [disabled]="!form.valid || (tagsArray.length == 0)" class="btn preview-btn">Preview</button>
+        </div>
+    </form>
+</div>

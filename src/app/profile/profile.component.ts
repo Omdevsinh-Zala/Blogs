@@ -10,16 +10,12 @@ import { selectLoading } from './store/profile.reducer';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnDestroy {
   constructor(private service:UserService, private store:Store) {
     this.store.dispatch(profileActions.loadPage())
   }
 
   loading$ = this.store.select(selectLoading)
-
-  ngOnInit(): void {
-    this.service.setUserProfile()
-  }
 
   ngOnDestroy(): void {
   }

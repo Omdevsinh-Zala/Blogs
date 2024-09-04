@@ -6,14 +6,12 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { Observable, ReplaySubject, from, of } from 'rxjs';
+import { ReplaySubject, from, of } from 'rxjs';
 import { LoginUser } from '../../models/login-user';
-import { Database, limitToFirst, onValue, push, update } from '@angular/fire/database';
+import { Database, onValue, push, update } from '@angular/fire/database';
 import { child, query, ref, set } from 'firebase/database';
 import { Router } from '@angular/router';
 import { Users } from '../../models/users';
-import { Store } from '@ngrx/store';
-import { loginActions } from '../../store/app.actions';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { UpdateUser } from '../../models/updateUser';
@@ -35,12 +33,17 @@ export class UserService {
   private userProfile = new ReplaySubject<Users | null>(1);
   userProfile$ = this.userProfile.asObservable()
   currentUserData!:Users
+  userDataForAuth!:string
+  lastUrl!:string
 
   setUser() {
     this.currentUser.subscribe({
       next: (data: User) => {
         if (data) {
           this.user.next(data);
+          data.getIdToken().then((res) => {
+            this.userDataForAuth = res
+          })
           this.setCurrentUser(data);
         } else {
           this.user.next(null);
@@ -134,6 +137,7 @@ export class UserService {
       socialLinks: [{ gitHub: '', facebook: '', twitter: '', instagram: '' }],
       work: '',
       workEmail: '',
+      posts: {userPosts: ''}
     };
     set(newUserRef, newUser);
   }
@@ -144,7 +148,10 @@ export class UserService {
     onValue(userData, (snapshot) => {
       const user: { [key: string]: Users } = snapshot.val();
       const users = Object.values(user);
-      const name = this.router.url.split('/')[1];
+      let name = this.router.url.split('/')[1];
+      if(this.lastUrl) {
+        name = this.lastUrl
+      }
       const currentUser = users.filter((user) => user.uniqueName == name);
       this.userProfile.next(currentUser[0]);
     });

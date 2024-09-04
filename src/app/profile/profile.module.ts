@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { CardContentComponent } from './card-content/card-content.component';
 import { CardExtraComponent } from './card-extra/card-extra.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-
+import { SharedModule } from '../shared module/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,9 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatCardModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    AsyncPipe,
+    SharedModule,
   ]
 })
 export class ProfileModule { }

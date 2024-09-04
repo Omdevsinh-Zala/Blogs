@@ -7,15 +7,16 @@ import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared module/shared.module';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    CardComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     HomeRoutingModule,
     MatCardModule,
     MatIconModule,

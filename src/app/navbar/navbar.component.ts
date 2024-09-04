@@ -55,15 +55,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   profile() {
     this.currentUser$.subscribe({
       next:(data) => {
-        console.log(data)
         this.router.navigateByUrl(`/${data?.uniqueName}`)
-        this.options = !this.options
       }
     })
+    this.options = !this.options
   }
 
   logout() {
+    const route = this.router.url.split('/')[1]
+    if(route == 'create-blog') {
+      this.router.navigateByUrl('/Home')
+    }
     this.user.firebaseSignOut()
+    this.options = !this.options
   }
 
   hideProfile() {
@@ -71,6 +75,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   updateProfile() {
+    this.user.lastUrl = this.router.url.split('/')[1]
     this.currentUser$.subscribe({
       next:(data) => {
         this.router.navigateByUrl(`/update-profile`)
@@ -80,7 +85,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.options = !this.options
-    console.log('Destroy')
+    // this.options = !this.options
+    // console.log('Destroy')
   }
 }

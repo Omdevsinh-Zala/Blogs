@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Blog Preview</h2>
+<mat-dialog-content>
+  <article class="main" #article>
+    <h1> {{data.title}} </h1>
+    <div *ngIf="tags" class="tag-wrap">
+      @for(tag of tags;track tag){
+        <div class="tag" [ngClass]="tagClasses[tag]"><span>#</span>{{ tag }}</div>
+      }
+    </div>
+    <div class="artical-start" [innerHTML]="blogData"></div>
+  </article>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn close-btn" mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -91,6 +91,14 @@
               background-color: rgba(0, 128, 0, 0.637);
             }
           }
+          .spinner {
+            scale: 0.3;
+            position: absolute;
+            top: -42px;
+            ::ng-deep circle {
+              stroke: rgba(0, 128, 0, 0.637);
+            }
+          }
         }
       }
     }
@@ -176,4 +184,13 @@
             }
         }
     }
+}
+.mainSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(50% - 50%);
+  ::ng-deep circle {
+    stroke: rgba(0, 128, 0, 0.637);
+  }
 }

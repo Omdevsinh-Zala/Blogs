@@ -40,7 +40,8 @@ export class RegisterComponent {
     if(userData.email && userData.password) {
       this.service.uniqueNameService().subscribe({
         next:(data) => {
-          const usersData = Object.values(data)
+          if(data) {
+            const usersData = Object.values(data)
           const userFilter = usersData.filter((user) => user.uniqueName == userData.uniqueName)
           if(userFilter.length == 0) {
                   this.registerStore.register(userData);
@@ -48,6 +49,9 @@ export class RegisterComponent {
                   this.store.dispatch(loginActions.faliure({error: 'Unique name already taken'}))
                   this.clear.cleareError()
                 }
+          } else {
+            this.registerStore.register(userData);
+          }
         }
       })
     }

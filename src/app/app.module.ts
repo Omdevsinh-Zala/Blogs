@@ -12,7 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { LoginEffect } from './store/app.effects';
 import { LoginKey, LoginReducer } from './store/app.reducer';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -26,6 +26,13 @@ import { environment } from '../environments/environment.development';
 import { ChangeProfileComponent } from './forms/change-profile/change-profile.component';
 import { ProfileEffrects } from './profile/store/profile.effects';
 import { ProfileKey, profileReducer } from './profile/store/profile.reducer';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { PreviewComponent } from './dialogbox/preview/preview.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -35,6 +42,8 @@ import { ProfileKey, profileReducer } from './profile/store/profile.reducer';
     NavbarComponent,
     ForgetPasswordComponent,
     ChangeProfileComponent,
+    CreateBlogComponent,
+    PreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,12 +51,16 @@ import { ProfileKey, profileReducer } from './profile/store/profile.reducer';
     ReactiveFormsModule,
     AsyncPipe,
     CommonModule,
+    MatChipsModule,
     MatIconModule,
     MatProgressSpinner,
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature(LoginKey, LoginReducer),
     StoreModule.forFeature(ProfileKey, profileReducer),
     EffectsModule.forRoot([LoginEffect, ProfileEffrects]),
+    CKEditorModule,
+    MatDialogModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -1,0 +1,75 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .fieldset {
+    border: none;
+    position: relative;
+    .input {
+      width: 100%;
+      padding: 10px 8px;
+      border: 1px solid hsl(220, 6%, 81%);
+      font-size: 17px;
+      font-stretch: semi-expanded;
+      border-radius: var(--ck-border-radius);
+      &:focus {
+        border: var(--ck-focus-ring);
+        box-shadow: var(--ck-inner-shadow), 0 0;
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 17px;
+        font-weight: 500;
+        font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
+        font-stretch: ultra-expanded;
+      }
+    }
+    .tags-btn {
+      position: absolute;
+      top: 4.1px;
+      right: 10px;
+      background-color: rgba(0, 128, 0, 0.637);
+      color: white;
+      font-size: 18px;
+      border: white;
+      margin: 0;
+      &:hover {
+        outline: 2px solid rgba(0, 128, 0, 0.637);
+        outline-offset: 2px;
+      }
+    }
+  }
+  ::ng-deep .ck-editor__editable_inline {
+    min-height: 500px;
+  }
+  .btn-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+    .submit-btn,
+    .preview-btn
+    {
+      background-color: rgba(0, 128, 0, 0.637);
+      color: white;
+      font-size: 18px;
+      border: white;
+      margin: 0;
+      &:hover {
+        outline: 2px solid rgba(0, 128, 0, 0.637);
+        outline-offset: 2px;
+      }
+    }
+    .submit-btn {
+      .spinner {
+        height: 25px !important;
+        width: 60px !important;
+        ::ng-deep circle {
+          stroke: white;
+        }
+      }
+    }
+  }
+}
+::ng-deep a {
+  display: none !important;
+}

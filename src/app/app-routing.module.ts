@@ -8,6 +8,8 @@ import { updateGuard } from './routeGuard/updatePassword/update.guard';
 import { TitleService } from './services/resolver/title.service';
 import { ChangeProfileComponent } from './forms/change-profile/change-profile.component';
 import { updateProfileGuard } from './routeGuard/updateProfile/update-profile.guard';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { createBlogGuard } from './routeGuard/createBlogsGuard/create-blog.guard';
 
 const routes: Routes = [
   {
@@ -33,6 +35,12 @@ const routes: Routes = [
     component: ChangeProfileComponent,
     title: 'Change Profile',
     canActivate: [updateProfileGuard],
+  },
+  {
+    path:'create-blog',
+    component: CreateBlogComponent,
+    title: 'create-blog',
+    canActivate:[createBlogGuard]
   },
   {
     path: '',

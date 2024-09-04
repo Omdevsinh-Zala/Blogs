@@ -3,23 +3,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { SocilaLinks, Users } from '../../models/users';
 import { UpdateUser } from '../../models/updateUser';
-import { Router } from '@angular/router';
 import { loginActions } from '../../store/app.actions';
 import { Store } from '@ngrx/store';
 import { ClearErrorService } from '../../services/clearError/clear-error.service';
+import { ChangeProfileStore, Values } from './store/changeProfile.store';
 
 @Component({
   selector: 'app-change-profile',
   templateUrl: './change-profile.component.html',
   styleUrl: './change-profile.component.scss',
+  providers:[ChangeProfileStore]
 })
 export class ChangeProfileComponent implements OnInit {
   constructor(
     private service: UserService,
-    private router: Router,
     private store: Store,
-    private error: ClearErrorService
+    private error: ClearErrorService,
+    private componentStore: ChangeProfileStore
   ) {}
+  mainLoading$ = this.componentStore.mainLoading$
+  loading$ = this.componentStore.loading$
   user!: Users;
   user$ = this.service.currentUserRef$;
   options: boolean = false;
@@ -39,10 +42,12 @@ export class ChangeProfileComponent implements OnInit {
   @ViewChild('img') img!:ElementRef
 
   ngOnInit(): void {
+    this.componentStore.getData()
     this.service.currentUserRef$.subscribe({
       next: (data) => {
         if (data) {
           this.user = data;
+          this.service.lastUrl = data.uniqueName
           this.userProfile.patchValue({
             firstName: data.firstName,
             lastName: data.lastName,
@@ -120,15 +125,29 @@ export class ChangeProfileComponent implements OnInit {
       }
     }
     if (userData.language && userData.language.includes(',')) {
-      this.service.firebaseUpdateUser(this.user, userData).subscribe();
-      if(this.selectedImage) {
-        this.service.updateUserImage(this.selectedImage)
+      let data:Values = {
+        user:this.user,
+        data: userData
       }
-      this.service.currentUserRef$.subscribe({
-        next: (data) => {
-          this.router.navigateByUrl(`${data?.uniqueName}`);
-        },
-      });
+      this.componentStore.updateUser(data)
+      // this.service.firebaseUpdateUser(this.user, userData).subscribe({
+      //   next:(data) => {
+      //     if(this.selectedImage) {
+      //       this.service.updateUserImage(this.selectedImage)
+      //     }
+      //     this.service.currentUserRef$.subscribe({
+      //       next: (data) => {
+      //         this.router.navigateByUrl(`${data?.uniqueName}`);
+      //       },
+      //     });
+      //   },
+      //   error:(err:HttpErrorResponse) => {
+      //     this.store.dispatch(
+      //       loginActions.faliure({ error: err.error.error })
+      //     );
+      //     this.error.cleareError();
+      //   }
+      // });
     } else {
       this.store.dispatch(
         loginActions.faliure({ error: "Language must include ' , ' in it" })

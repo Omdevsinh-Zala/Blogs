@@ -8,7 +8,7 @@ export interface Posts {
   user: string;
   useremail: string;
   image:string
-  created:Date
+  created:number
 }
 
 export interface reaction {

@@ -1,171 +1,197 @@
 <div class="container">
+  @if (mainLoading$ | async) {
+    <mat-spinner class="mainSpinner" ></mat-spinner>
+  } @else {
     <div class="form-wrap">
-        <form class="form" [formGroup]="userProfile">
-            <div class="form-inner-wrap">
-                <div class="first-wrap">
-                    <div class="half-feild">
-                        <fieldset class="feildset">
-                            <label class="label" >FirstName</label>
-                            <input
-                            formControlName="firstName"
-                            class="input"
-                            type="text"
-                            placeholder="Enter your first name..."
-                            >
-                        </fieldset>
-                    </div>
-                    <div class="half-feild">
-                        <fieldset class="feildset">
-                            <label class="label" >LastName</label>
-                            <input
-                            formControlName="lastName"
-                            class="input"
-                            type="text"
-                            placeholder="Enter your last name..."
-                            >
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="second-wrap">
-                    <div class="half-feild">
-                        <fieldset class="feildset">
-                            <label class="label" >Email</label>
-                            <input
-                            formControlName="email"
-                            class="input"
-                            type="email"
-                            placeholder="Enter your emial..."
-                            >
-                        </fieldset>
-                    </div>
-                    <div class="half-feild">
-                        <fieldset class="feildset">
-                            <label class="label" >Location</label>
-                            <input
-                            formControlName="location"
-                            class="input"
-                            type="text"
-                            placeholder="Enter your location..."
-                            >
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="third-wrap">
-                    <div class="half-feild">
-                        <fieldset class="feildset">
-                            <label class="label" >Work Email</label>
-                            <input
-                            formControlName="workEmail"
-                            class="input"
-                            type="email"
-                            placeholder="Enter your work email..."
-                            >
-                        </fieldset>
-                    </div>
-                    <div class="half-feild">
-                        <form class="social-form" [formGroup]="socialLinks">
-                            <div class="link-wrap">
-                                <fieldset class="feildset">
-                                    <label class="label" >Github link</label>
-                                    <input
-                                    formControlName="github"
-                                    class="input"
-                                    type="text"
-                                    placeholder="Enter your github link..."
-                                    >
-                                </fieldset>
-                            </div>
-                            <div class="link-wrap">
-                                <fieldset class="feildset">
-                                    <label class="label" >Facebook link</label>
-                                    <input
-                                    formControlName="facebook"
-                                    class="input"
-                                    type="text"
-                                    placeholder="Enter your facebook link..."
-                                    >
-                                </fieldset>
-                            </div>
-                            <div class="link-wrap">
-                                <fieldset class="feildset">
-                                    <label class="label" >Twitter link</label>
-                                    <input
-                                    formControlName="twitter"
-                                    class="input"
-                                    type="text"
-                                    placeholder="Enter your twitter link..."
-                                    >
-                                </fieldset>
-                            </div>
-                            <div class="link-wrap">
-                                <fieldset class="feildset">
-                                    <label class="label" >Instagram link</label>
-                                    <input
-                                    formControlName="instagram"
-                                    class="input"
-                                    type="text"
-                                    placeholder="Enter your instagram link..."
-                                    >
-                                </fieldset>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="fifth-wrap">
-                    <div class="full-feild">
-                        <fieldset class="feildset">
-                            <label class="label">Bio</label>
-                            <textarea class="textarea" formControlName="bio" placeholder="Enter your bio..." ></textarea>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="sixth-wrap">
-                    <div class="full-feild">
-                        <fieldset class="feildset">
-                            <label class="label">Work</label>
-                            <textarea class="textarea" formControlName="work" placeholder="Enter your work details..." ></textarea>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="seventh-wrap">
-                    <div class="full-feild">
-                        <fieldset class="feildset">
-                            <label class="label">Language</label>
-                            <textarea class="textarea" formControlName="language" placeholder="Ex:- HTML, CSS, JS" ></textarea>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="eight-wrap">
-                    <div class="full-feild">
-                        <fieldset class="feildset">
-                            <label class="label">Skills</label>
-                            <textarea class="textarea" formControlName="skills" placeholder="Ex:- Excellent speaker, ..." ></textarea>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="ninth-wrap">
-                    <div class="btn-wrap">
-                        <button class="btn update-btn" (click)="updateProfile()" >Update</button>
-                    </div>
-                </div>
-                <div class="tenth-wrap">
-                    <div class="image-wrap">
-                        <img class="img" [src]="(user$ | async)?.image" #img />
-                    </div>
-                    <div class="icon-wrap">
-                        <mat-icon (click)="showImages()" >camera</mat-icon>
-                    </div>
-                </div>
+      <form class="form" [formGroup]="userProfile">
+        <div class="form-inner-wrap">
+          <div class="first-wrap">
+            <div class="half-feild">
+              <fieldset class="feildset">
+                <label class="label">FirstName</label>
+                <input
+                  formControlName="firstName"
+                  class="input"
+                  type="text"
+                  placeholder="Enter your first name..."
+                />
+              </fieldset>
             </div>
-        </form>
+            <div class="half-feild">
+              <fieldset class="feildset">
+                <label class="label">LastName</label>
+                <input
+                  formControlName="lastName"
+                  class="input"
+                  type="text"
+                  placeholder="Enter your last name..."
+                />
+              </fieldset>
+            </div>
+          </div>
+          <div class="second-wrap">
+            <div class="half-feild">
+              <fieldset class="feildset">
+                <label class="label">Email</label>
+                <input
+                  formControlName="email"
+                  class="input"
+                  type="email"
+                  placeholder="Enter your emial..."
+                />
+              </fieldset>
+            </div>
+            <div class="half-feild">
+              <fieldset class="feildset">
+                <label class="label">Location</label>
+                <input
+                  formControlName="location"
+                  class="input"
+                  type="text"
+                  placeholder="Enter your location..."
+                />
+              </fieldset>
+            </div>
+          </div>
+          <div class="third-wrap">
+            <div class="half-feild">
+              <fieldset class="feildset">
+                <label class="label">Work Email</label>
+                <input
+                  formControlName="workEmail"
+                  class="input"
+                  type="email"
+                  placeholder="Enter your work email..."
+                />
+              </fieldset>
+            </div>
+            <div class="half-feild">
+              <form class="social-form" [formGroup]="socialLinks">
+                <div class="link-wrap">
+                  <fieldset class="feildset">
+                    <label class="label">Github link</label>
+                    <input
+                      formControlName="github"
+                      class="input"
+                      type="text"
+                      placeholder="Enter your github link..."
+                    />
+                  </fieldset>
+                </div>
+                <div class="link-wrap">
+                  <fieldset class="feildset">
+                    <label class="label">Facebook link</label>
+                    <input
+                      formControlName="facebook"
+                      class="input"
+                      type="text"
+                      placeholder="Enter your facebook link..."
+                    />
+                  </fieldset>
+                </div>
+                <div class="link-wrap">
+                  <fieldset class="feildset">
+                    <label class="label">Twitter link</label>
+                    <input
+                      formControlName="twitter"
+                      class="input"
+                      type="text"
+                      placeholder="Enter your twitter link..."
+                    />
+                  </fieldset>
+                </div>
+                <div class="link-wrap">
+                  <fieldset class="feildset">
+                    <label class="label">Instagram link</label>
+                    <input
+                      formControlName="instagram"
+                      class="input"
+                      type="text"
+                      placeholder="Enter your instagram link..."
+                    />
+                  </fieldset>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="fifth-wrap">
+            <div class="full-feild">
+              <fieldset class="feildset">
+                <label class="label">Bio</label>
+                <textarea
+                  class="textarea"
+                  formControlName="bio"
+                  placeholder="Enter your bio..."
+                ></textarea>
+              </fieldset>
+            </div>
+          </div>
+          <div class="sixth-wrap">
+            <div class="full-feild">
+              <fieldset class="feildset">
+                <label class="label">Work</label>
+                <textarea
+                  class="textarea"
+                  formControlName="work"
+                  placeholder="Enter your work details..."
+                ></textarea>
+              </fieldset>
+            </div>
+          </div>
+          <div class="seventh-wrap">
+            <div class="full-feild">
+              <fieldset class="feildset">
+                <label class="label">Language</label>
+                <textarea
+                  class="textarea"
+                  formControlName="language"
+                  placeholder="Ex:- HTML, CSS, JS"
+                ></textarea>
+              </fieldset>
+            </div>
+          </div>
+          <div class="eight-wrap">
+            <div class="full-feild">
+              <fieldset class="feildset">
+                <label class="label">Skills</label>
+                <textarea
+                  class="textarea"
+                  formControlName="skills"
+                  placeholder="Ex:- Excellent speaker, ..."
+                ></textarea>
+              </fieldset>
+            </div>
+          </div>
+          <div class="ninth-wrap">
+            <div class="btn-wrap">
+              @if(loading$ | async) {
+              <mat-spinner class="spinner" color="warn"></mat-spinner>
+              } @else {
+              <button class="btn update-btn" (click)="updateProfile()">
+                Update
+              </button>
+              }
+            </div>
+          </div>
+          <div class="tenth-wrap">
+            <div class="image-wrap">
+              <img class="img" [src]="(user$ | async)?.image" #img />
+            </div>
+            <div class="icon-wrap">
+              <mat-icon (click)="showImages()">camera</mat-icon>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
     <div *ngIf="options" class="images-wrap">
-        <ul class="images-list">
-            @for (image of images; track image) {
-                <li class="images">
-                    <img src="{{image}}" class="image" (click)="selectImage(image)"/>
-                </li>
-            }
-        </ul>
+      <ul class="images-list">
+        @for (image of images; track image) {
+        <li class="images">
+          <img src="{{ image }}" class="image" (click)="selectImage(image)" />
+        </li>
+        }
+      </ul>
     </div>
+  }
 </div>

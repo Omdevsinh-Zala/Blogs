@@ -82,6 +82,9 @@
       justify-content: center;
       .user-info {
         max-width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
         .info-wrap {
           display: flex;
           flex-direction: row;
@@ -90,12 +93,16 @@
           gap: 20px;
           .location-info,
           .joined-info,
-          .workEmail-info,
-          .profile-links-wrap {
+          .workEmail-info {
             display: flex;
             flex-direction: row;
             gap: 8px;
             align-items: center;
+          }
+        }
+        .profile-links-wrap {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(25%,1fr));
             .gitHub-link,
             .twitter-link,
             .facebook-link,
@@ -147,7 +154,6 @@
                 }
               }
             }
-          }
         }
       }
     }

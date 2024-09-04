@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Users } from '../../models/users';
 import { Observable } from 'rxjs';
@@ -10,5 +10,5 @@ import { Observable } from 'rxjs';
 })
 export class CardExtraComponent {
   constructor(private service:UserService) {}
-  @Input() databaseUser$!:Observable<Users | null>
+  @Input() databaseUser$!:Observable<Users | null>;
 }
