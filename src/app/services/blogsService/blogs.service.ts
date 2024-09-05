@@ -2,11 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { Database, onValue, push, set } from '@angular/fire/database';
 import { query, ref } from 'firebase/database';
 import { Posts } from '../../models/posts';
-import { BehaviorSubject, from, map, of, ReplaySubject } from 'rxjs';
+import { from, ReplaySubject } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
-import { Users } from '../../models/users';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ClearErrorService } from '../../services/clearError/clear-error.service';
 import { loginActions } from '../../store/app.actions';
@@ -7,7 +7,6 @@ import { loginActions } from '../../store/app.actions';
 export const createBlogGuard: CanActivateFn = (route, state) => {
   const store = inject(Store)
   const removeError = inject(ClearErrorService)
-  const router = inject(Router)
   const data = localStorage.getItem('User')
   if(data) {
     return true

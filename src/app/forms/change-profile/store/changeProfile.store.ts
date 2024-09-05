@@ -27,7 +27,7 @@ export interface Values {
 
 @Injectable()
 export class ChangeProfileStore extends ComponentStore<Initialstate> {
-    constructor(private service:UserService, private router:Router, private store:Store, private errorService:ClearErrorService) {
+    constructor(private service:UserService, private store:Store, private errorService:ClearErrorService) {
         super(initialstate)
     }
 

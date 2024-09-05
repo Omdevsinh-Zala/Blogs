@@ -1,10 +1,8 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Posts } from '../../models/posts';
-import { update } from 'firebase/database';
-import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 import { PostsService } from '../../services/postService/posts.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FirebaseError } from 'firebase/app';
 
 interface InitialState {

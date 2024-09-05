@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
-import { Observable, of, switchMap, tap } from "rxjs";
 import { Interaction } from "../../../models/likeViews";
 
 interface interactions {

@@ -1,11 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Users } from '../../models/users';
 import { Observable } from 'rxjs';
-import { Posts } from '../../models/posts';
 import { Router } from '@angular/router';
 import { CardContentStore } from './store/cardContent.store';
-import { BlogsService } from '../../services/blogsService/blogs.service';
 
 @Component({
   selector: 'app-card-content',
@@ -14,7 +12,7 @@ import { BlogsService } from '../../services/blogsService/blogs.service';
   providers:[CardContentStore]
 })
 export class CardContentComponent implements OnInit {
-  constructor(private serice:UserService, private router:Router, private store:CardContentStore, private blodsService: BlogsService) {}
+  constructor(private serice:UserService, private router:Router, private store:CardContentStore) {}
   user$ = this.serice.currentUser$
   @Input() databaseUser$!:Observable<Users | null>
   ngOnInit(): void {

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
+import { Component, Input } from '@angular/core';
 import { Users } from '../../models/users';
 import { Observable } from 'rxjs';
 
@@ -9,6 +8,6 @@ import { Observable } from 'rxjs';
   styleUrl: './card-extra.component.scss'
 })
 export class CardExtraComponent {
-  constructor(private service:UserService) {}
+  constructor() {}
   @Input() databaseUser$!:Observable<Users | null>;
 }

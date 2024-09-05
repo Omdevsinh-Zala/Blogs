@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Posts } from '../models/posts';
 import { PostsService } from '../services/postService/posts.service';
 import { HomeStore } from './store/home.store';
@@ -10,7 +10,7 @@ import { HomeStore } from './store/home.store';
   providers:[HomeStore]
 })
 export class HomeComponent implements OnInit {
-  constructor(private store:HomeStore, private service:PostsService, private post:PostsService) {}
+  constructor(private store:HomeStore, private post:PostsService) {}
   ngOnInit(): void {
     this.store.loadPosts()
   }

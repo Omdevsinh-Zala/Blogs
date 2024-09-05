@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComponentStore } from '@ngrx/component-store';
-import { catchError, delay, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FirebaseError } from 'firebase/app';
 
 interface UpdatePassword {

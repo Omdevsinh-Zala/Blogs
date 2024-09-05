@@ -21,7 +21,7 @@ export class LoginEffect {
         switchMap(({ user }) => {
           return loginService.FirebaseUserLogin(user).pipe(
             delay(1000),
-            map((value) => {
+            map(() => {
               router.navigateByUrl('/Home');
               return loginActions.success({message: 'Login Successfully'});
             }),

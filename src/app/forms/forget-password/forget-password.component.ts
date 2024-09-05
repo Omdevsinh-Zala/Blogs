@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Update, UpdatePasswordStore } from './componentStore/updatePassword.store';
+import { UpdatePasswordStore } from './componentStore/updatePassword.store';
 
 @Component({
   selector: 'app-forget-password',

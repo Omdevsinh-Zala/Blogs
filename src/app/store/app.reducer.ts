@@ -1,7 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { Users } from "../models/users";
 import { loginActions } from "./app.actions";
-import { Action } from "rxjs/internal/scheduler/Action";
 
 
 interface LoggedUser {

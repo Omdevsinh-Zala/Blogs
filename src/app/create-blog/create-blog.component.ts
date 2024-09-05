@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Alignment,
@@ -53,19 +53,21 @@ import { CreateBlogStore } from './store/createBlog.store';
   styleUrl: './create-blog.component.scss',
   providers:[CreateBlogStore]
 })
-export class CreateBlogComponent {
+export class CreateBlogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service:UserService,
     private stor:Store,
     private errorRemover:ClearErrorService,
-    private blogsService:BlogsService,
     private component:CreateBlogStore
   ) {
     this.form = this.fb.group({
       title: new FormControl('',[Validators.required]),
       content: new FormControl('',[Validators.required]),
     });
+  }
+  ngOnInit(): void {
+    this.service.lastUrl = this.service.currentUserData.uniqueName
   }
   dialog = inject(MatDialog);
   form!: FormGroup;

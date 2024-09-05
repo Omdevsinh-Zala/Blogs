@@ -3,7 +3,6 @@ import { CanActivateFn, NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loginActions } from '../../store/app.actions';
 import { ClearErrorService } from '../../services/clearError/clear-error.service';
-import { UserService } from '../../services/user/user.service';
 
 export const loginRegisterGuard: CanActivateFn = (route, state) => {
   let router = inject(Router)

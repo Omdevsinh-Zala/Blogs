@@ -67,7 +67,6 @@ export class CardContentStore extends ComponentStore<Initialstate> {
                   this.setLoading(false);
                 }
               }
-              console.log(this.allPosts)
               this.setPosts();
             } else {
               this.allPosts = [];
@@ -94,7 +93,9 @@ export class CardContentStore extends ComponentStore<Initialstate> {
                 map(() => {
                     this.postId = data$
                     this.service.removeBlogFromUser(this.postId)
-                    this.setLoading(false)
+                    setTimeout(() => {
+                        this.setLoading(false)
+                    },1000)
                 })
             )
         })

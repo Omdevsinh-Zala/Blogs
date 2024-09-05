@@ -9,7 +9,7 @@ import { CardStore } from './store/card.store';
   providers:[CardStore]
 })
 export class CardComponent implements OnInit {
-  constructor(private store:CardStore){}
+  constructor(){}
   @Input() post!:Posts
 
   tagClasses:{[tag:string]:string} = {}

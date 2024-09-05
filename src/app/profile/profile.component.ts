@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user/user.service';
-import { Users } from '../models/users';
 import { Store } from '@ngrx/store';
 import { profileActions } from './store/profile.actions';
 import { selectLoading } from './store/profile.reducer';

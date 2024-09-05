@@ -8,8 +8,8 @@ import {
 } from 'firebase/auth';
 import { ReplaySubject, from, of } from 'rxjs';
 import { LoginUser } from '../../models/login-user';
-import { Database, onValue, push, update } from '@angular/fire/database';
-import { child, query, ref, set } from 'firebase/database';
+import { Database, onValue, push } from '@angular/fire/database';
+import { query, ref, set } from 'firebase/database';
 import { Router } from '@angular/router';
 import { Users } from '../../models/users';
 import { HttpClient } from '@angular/common/http';
@@ -146,8 +146,8 @@ export class UserService {
   setUserProfile() {
     const userData = query(this.userRef);
     onValue(userData, (snapshot) => {
-      const user: { [key: string]: Users } = snapshot.val();
-      const users = Object.values(user);
+      const data: { [key: string]: Users } = snapshot.val();
+      const users = Object.values(data);
       let name = this.router.url.split('/')[1];
       if(this.lastUrl) {
         name = this.lastUrl

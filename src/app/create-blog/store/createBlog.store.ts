@@ -44,6 +44,7 @@ export class CreateBlogStore extends ComponentStore<Initialstate> {
                     }),
                     catchError((err:FirebaseError) => {
                         this.store.dispatch(loginActions.faliure({error: err.message}))
+                        this.errorRemover.cleareError()
                         return of(null)
                     })
                 )

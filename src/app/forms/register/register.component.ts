@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginUser } from '../../models/login-user'
 import { RegisterStore } from './componentStore/register.store';
-import { query, onValue } from 'firebase/database';
-import { of } from 'rxjs';
-import { Users } from '../../models/users';
 import { loginActions } from '../../store/app.actions';
 import { UserService } from '../../services/user/user.service';
 import { Store } from '@ngrx/store';

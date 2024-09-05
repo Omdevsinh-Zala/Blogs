@@ -20,7 +20,7 @@
                             <app-card [post]="post" class="card" ></app-card>
                             <div *ngIf="url == (userName | async)?.uniqueName" class="btn-wrap">
                                 <button class="btn remove-btn" (click)="removeBlog(post.id)" ><mat-icon>delete_outline</mat-icon></button>
-                                <button class="btn edit-btn"><mat-icon>edit</mat-icon></button>
+                                <!-- <button class="btn edit-btn"><mat-icon>edit</mat-icon></button> -->
                             </div>
                         </li>
                     } @empty {

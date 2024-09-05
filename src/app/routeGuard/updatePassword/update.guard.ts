@@ -1,8 +1,7 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, NavigationStart, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ClearErrorService } from '../../services/clearError/clear-error.service';
-import { UserService } from '../../services/user/user.service';
 import { loginActions } from '../../store/app.actions';
 
 export const updateGuard: CanActivateFn = (route, state) => {

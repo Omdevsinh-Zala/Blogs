@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -7,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { UserService } from '../services/user/user.service';
 
 @Component({
