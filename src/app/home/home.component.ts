@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   posts$ = this.store.posts$
 
   addPost(data: Posts) {
-    this.service.submitPost(data)
+    // this.service.submitPost(data)
   }
 
   showMore() {

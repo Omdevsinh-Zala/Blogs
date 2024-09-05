@@ -130,24 +130,6 @@ export class ChangeProfileComponent implements OnInit {
         data: userData
       }
       this.componentStore.updateUser(data)
-      // this.service.firebaseUpdateUser(this.user, userData).subscribe({
-      //   next:(data) => {
-      //     if(this.selectedImage) {
-      //       this.service.updateUserImage(this.selectedImage)
-      //     }
-      //     this.service.currentUserRef$.subscribe({
-      //       next: (data) => {
-      //         this.router.navigateByUrl(`${data?.uniqueName}`);
-      //       },
-      //     });
-      //   },
-      //   error:(err:HttpErrorResponse) => {
-      //     this.store.dispatch(
-      //       loginActions.faliure({ error: err.error.error })
-      //     );
-      //     this.error.cleareError();
-      //   }
-      // });
     } else {
       this.store.dispatch(
         loginActions.faliure({ error: "Language must include ' , ' in it" })

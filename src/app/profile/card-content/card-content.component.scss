@@ -37,11 +37,9 @@
       .blogs-list {
         display: flex;
         flex-direction: column;
-        gap: 10px;
         list-style: none;
-        .blog {
-          padding: 5px;
-        }
+        padding: 10px;
+        gap: 10px;
         .empty-wrap {
           padding: 12px;
         }
@@ -54,32 +52,60 @@
   place-items: center;
   margin: 10px 0;
   .spinner {
-    height: 60px !important;
-    width: 60px !important;
+    height: 50px !important;
+    width: 50px !important;
     ::ng-deep circle {
       stroke: rgba(0, 128, 0, 0.637);
     }
   }
 }
 .blogs {
-  padding: 5px;
+  position: relative;
   .card {
     ::ng-deep .title-wrap {
-      font-size: 24px !important;
-      line-height: 24px;
+      font-size: 20px !important;
+      line-height: 22px;
     }
     ::ng-deep mat-card-header {
       padding: 8px 8px 0 !important;
     }
     ::ng-deep mat-card-content {
-      margin: 0 !important;
+      margin: 2px !important;
+      padding: 0 62px !important;
       .tag {
-        padding: 0 !important;
+        padding: 6px !important;
       }
     }
     ::ng-deep mat-card-actions {
       margin: 0 !important;
       padding: 0 !important;
+    }
+  }
+  .btn-wrap {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    flex-direction: row;
+    gap: 12px;
+    z-index: 4;
+    .remove-btn {
+      margin: 0;
+      padding: 6px 20px;
+      background-color: rgba(255, 39, 39, 0.801);
+    }
+    .edit-btn {
+      margin: 0;
+      padding: 6px 20px;
+      background-color: cornflowerblue;
+    }
+    mat-icon {
+      color: white;
+    }
+  }
+  &:hover {
+    .btn-wrap {
+      display: flex;
     }
   }
 }

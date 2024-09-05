@@ -194,7 +194,7 @@ export class CreateBlogComponent {
       body: data.content,
       id: '',
       created: date.getTime(),
-      reactions: {likes: []},
+      reactions: {likes: ''},
       tags: this.tagsArray,
       user: this.service.currentUserData.uniqueName,
       useremail: this.service.currentUserData.email,

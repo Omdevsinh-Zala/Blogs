@@ -1,23 +1,33 @@
 <div class="user-content">
     <div class="blogs-wrap">
         <div class="title-wrap">
-            @if (url ==userName) {
+            @if (url == (userName | async)?.uniqueName) {
                 Your blog's
+                <button (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
             } @else {
                 Blog's
             }
-            <button *ngIf="url == userName" (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
         </div>
         <div class="blogs-list-wrap">
             <ul class="blogs-list">
-                @for (post of posts; track posts) {
-                    <li class="blogs">
-                        <app-card [post]="post" ></app-card>
-                    </li>
-                } @empty {
-                    <div class="empty-wrap">
-                        <p>No blogs at this moment!</p>
+                @if (loading$ | async) {
+                    <div class="spinner-wrap">
+                        <mat-spinner class="spinner"></mat-spinner>
                     </div>
+                } @else {
+                    @for (post of (posts | async); track post.id) {
+                        <li class="blogs">
+                            <app-card [post]="post" class="card" ></app-card>
+                            <div *ngIf="url == (userName | async)?.uniqueName" class="btn-wrap">
+                                <button class="btn remove-btn" (click)="removeBlog(post.id)" ><mat-icon>delete_outline</mat-icon></button>
+                                <button class="btn edit-btn"><mat-icon>edit</mat-icon></button>
+                            </div>
+                        </li>
+                    } @empty {
+                        <div class="empty-wrap">
+                            <p>No blogs at this moment!</p>
+                        </div>
+                    }
                 }
             </ul>
         </div>

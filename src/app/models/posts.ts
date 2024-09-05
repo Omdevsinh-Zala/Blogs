@@ -12,5 +12,5 @@ export interface Posts {
 }
 
 export interface reaction {
-    likes: number[];
+    likes: string;
 }

@@ -6,7 +6,7 @@
       style="background-image: url({{post.image}})"
     ></div>
     <mat-card-title>
-      {{ post.user }}
+      {{ post.user.at(0)?.toUpperCase() + post.user.slice(1) }}
     </mat-card-title>
     <mat-card-subtitle>
       {{ post.created | date }}
