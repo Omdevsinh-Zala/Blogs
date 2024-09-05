@@ -19,11 +19,12 @@ export class ProfileEffrects {
     return this.actio$.pipe(
       ofType(profileActions.loadPage),
       switchMap(() => {
-        return this.service.setUserProfile().pipe(
+        return this.service.setUserProfile(true).pipe(
           switchMap(() => {
             return this.service.userProfile$.pipe(
               map((data) => {
                 if (data) {
+                  console.log(data)
                   return profileActions.loadSuccess();
                 } else {
                   this.router.navigateByUrl('/Home');

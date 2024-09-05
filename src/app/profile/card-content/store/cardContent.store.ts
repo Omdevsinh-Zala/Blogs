@@ -31,46 +31,49 @@ export class CardContentStore extends ComponentStore<Initialstate> {
     ...state,
     posts: this.allPosts,
   }));
-
+  private firstTime:boolean = true
   private getUserPosts$ = this.effect((data$: Observable<string>) => {
     return data$.pipe(
       tap(() => {
         this.setLoading(true);
+        this.firstTime = true
       }),
       switchMap((data$) => {
         return this.service.retrievUserBlogs(data$).pipe(
           map((data) => {
-            if (data) {
-              if (this.allPosts.length == 0) {
-                this.allPosts.push(data);
-                this.setLoading(false);
-              } else {
-                const userIndex = this.allPosts.findIndex(
-                  (post) => post.user == data.user
-                );
-                if (userIndex == -1) {
-                  this.allPosts = [];
-                  const index = this.allPosts.findIndex(
-                    (post) => post.id == data.id
-                  );
-                  if (index == -1) {
-                    this.allPosts.push(data);
-                  }
+            if(this.firstTime == true) {
+              if (data) {
+                if (this.allPosts.length == 0) {
+                  this.allPosts.push(data);
                   this.setLoading(false);
                 } else {
-                  const index = this.allPosts.findIndex(
-                    (post) => post.id == data.id
+                  const userIndex = this.allPosts.findIndex(
+                    (post) => post.user == data.user
                   );
-                  if (index == -1) {
-                    this.allPosts.push(data);
+                  if (userIndex == -1) {
+                    this.allPosts = [];
+                    const index = this.allPosts.findIndex(
+                      (post) => post.id == data.id
+                    );
+                    if (index == -1) {
+                      this.allPosts.push(data);
+                    }
+                    this.setLoading(false);
+                  } else {
+                    const index = this.allPosts.findIndex(
+                      (post) => post.id == data.id
+                    );
+                    if (index == -1) {
+                      this.allPosts.push(data);
+                    }
+                    this.setLoading(false);
                   }
-                  this.setLoading(false);
                 }
+                this.setPosts();
+              } else {
+                this.allPosts = [];
+                this.setPosts();
               }
-              this.setPosts();
-            } else {
-              this.allPosts = [];
-              this.setPosts();
             }
           })
         );
@@ -87,15 +90,16 @@ export class CardContentStore extends ComponentStore<Initialstate> {
     return data$.pipe(
         tap(() => {
             this.setLoading(true)
+            this.firstTime = false
         }),
         switchMap((data$) => {
             return this.service.removeBlogFromPosts(data$).pipe(
                 map(() => {
                     this.postId = data$
                     this.service.removeBlogFromUser(this.postId)
-                    setTimeout(() => {
-                        this.setLoading(false)
-                    },1000)
+                    this.allPosts = this.allPosts.filter((post) => post.id != this.postId)
+                    this.setPosts()
+                    this.setLoading(false)
                 })
             )
         })

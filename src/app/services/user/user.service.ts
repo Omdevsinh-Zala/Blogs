@@ -1,5 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, getAuth, updateCurrentUser, updatePassword, user } from '@angular/fire/auth';
+import {
+  Auth,
+  getAuth,
+  updateCurrentUser,
+  updatePassword,
+  user,
+} from '@angular/fire/auth';
 import {
   User,
   createUserWithEmailAndPassword,
@@ -20,7 +26,11 @@ import { UpdateUser } from '../../models/updateUser';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private firebaseAuth: Auth, private router: Router, private http:HttpClient) {
+  constructor(
+    private firebaseAuth: Auth,
+    private router: Router,
+    private http: HttpClient
+  ) {
     this.setUser();
   }
   private currentUser = user(this.firebaseAuth);
@@ -31,10 +41,10 @@ export class UserService {
   private currentUserRef = new ReplaySubject<Users | null>(1);
   currentUserRef$ = this.currentUserRef.asObservable();
   private userProfile = new ReplaySubject<Users | null>(1);
-  userProfile$ = this.userProfile.asObservable()
-  currentUserData!:Users
-  userDataForAuth!:string
-  lastUrl!:string
+  userProfile$ = this.userProfile.asObservable();
+  currentUserData!: Users;
+  userDataForAuth!: string;
+  lastUrl!: string;
 
   setUser() {
     this.currentUser.subscribe({
@@ -42,8 +52,8 @@ export class UserService {
         if (data) {
           this.user.next(data);
           data.getIdToken().then((res) => {
-            this.userDataForAuth = res
-          })
+            this.userDataForAuth = res;
+          });
           this.setCurrentUser(data);
         } else {
           this.user.next(null);
@@ -137,25 +147,29 @@ export class UserService {
       socialLinks: [{ gitHub: '', facebook: '', twitter: '', instagram: '' }],
       work: '',
       workEmail: '',
-      posts: {userPosts: ''}
+      posts: { userPosts: '' },
     };
     set(newUserRef, newUser);
   }
 
   //For getting data on profile page
-  setUserProfile() {
+  setUserProfile(time: boolean) {
+    console.log(time)
     const userData = query(this.userRef);
     onValue(userData, (snapshot) => {
       const data: { [key: string]: Users } = snapshot.val();
       const users = Object.values(data);
       let name = this.router.url.split('/')[1];
-      if(this.lastUrl) {
-        name = this.lastUrl
+      if (this.lastUrl) {
+        name = this.lastUrl;
       }
       const currentUser = users.filter((user) => user.uniqueName == name);
-      this.userProfile.next(currentUser[0]);
+      if (time == true) {
+        this.userProfile.next(currentUser[0]);
+        time = false;
+      }
     });
-    return of(null)
+    return of(null);
   }
 
   //To set current user data
@@ -167,7 +181,7 @@ export class UserService {
         const users = Object.values(user);
         const currentUser = users.filter((user) => user.email == data.email);
         this.currentUserRef.next(currentUser[0]);
-        this.currentUserData = currentUser[0]
+        this.currentUserData = currentUser[0];
       });
     } else {
       this.currentUserRef.next(null);
@@ -176,18 +190,28 @@ export class UserService {
 
   //For duplicate uniqueName check
   uniqueNameService() {
-    return this.http.get<{[key:string]:Users}>(`${environment.firebaseConfig.databaseURL}` + '/users.json')
+    return this.http.get<{ [key: string]: Users }>(
+      `${environment.firebaseConfig.databaseURL}` + '/users.json'
+    );
   }
 
   //Update user data
-  firebaseUpdateUser(user:Users , data: UpdateUser) {
-    return this.http.patch(environment.firebaseConfig.databaseURL + `/users/${user.id}.json`, data)
+  firebaseUpdateUser(user: Users, data: UpdateUser) {
+    return this.http.patch(
+      environment.firebaseConfig.databaseURL + `/users/${user.id}.json`,
+      data
+    );
   }
 
   //Update image
-  auth = getAuth()
-  updateUserImage(data:string) {
-    let promise = updateCurrentUser(this.auth, this.firebaseAuth.currentUser).then((res) => updateProfile(this.firebaseAuth.currentUser!, {photoURL: data}))
-    return from(promise)
+  auth = getAuth();
+  updateUserImage(data: string) {
+    let promise = updateCurrentUser(
+      this.auth,
+      this.firebaseAuth.currentUser
+    ).then((res) =>
+      updateProfile(this.firebaseAuth.currentUser!, { photoURL: data })
+    );
+    return from(promise);
   }
 }

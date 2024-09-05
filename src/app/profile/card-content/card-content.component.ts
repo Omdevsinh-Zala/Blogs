@@ -16,6 +16,23 @@ export class CardContentComponent implements OnInit {
   user$ = this.serice.currentUser$
   @Input() databaseUser$!:Observable<Users | null>
   ngOnInit(): void {
+    this.fetchUserBlogs()
+    this.url = this.router.url.split('/')[1]
+  }
+  url!:string
+  userName = this.serice.currentUserRef$
+  posts = this.store.posts$
+  loading$ = this.store.loading$
+
+  addBlogs() {
+    this.router.navigateByUrl('/create-blog')
+  }
+
+  removeBlog(id:string) {
+    this.store.removeUserBlog(id)
+  }
+
+  fetchUserBlogs() {
     this.databaseUser$.subscribe({
       next:(data) => {
         if(data) {
@@ -32,18 +49,5 @@ export class CardContentComponent implements OnInit {
         }
       }
     })
-    this.url = this.router.url.split('/')[1]
-  }
-  url!:string
-  userName = this.serice.currentUserRef$
-  posts = this.store.posts$
-  loading$ = this.store.loading$
-
-  addBlogs() {
-    this.router.navigateByUrl('/create-blog')
-  }
-
-  removeBlog(id:string) {
-    this.store.removeUserBlog(id)
   }
 }

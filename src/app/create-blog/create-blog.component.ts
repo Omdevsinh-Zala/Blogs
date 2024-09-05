@@ -53,7 +53,7 @@ import { CreateBlogStore } from './store/createBlog.store';
   styleUrl: './create-blog.component.scss',
   providers:[CreateBlogStore]
 })
-export class CreateBlogComponent implements OnInit {
+export class CreateBlogComponent {
   constructor(
     private fb: FormBuilder,
     private service:UserService,
@@ -65,9 +65,6 @@ export class CreateBlogComponent implements OnInit {
       title: new FormControl('',[Validators.required]),
       content: new FormControl('',[Validators.required]),
     });
-  }
-  ngOnInit(): void {
-    this.service.lastUrl = this.service.currentUserData.uniqueName
   }
   dialog = inject(MatDialog);
   form!: FormGroup;

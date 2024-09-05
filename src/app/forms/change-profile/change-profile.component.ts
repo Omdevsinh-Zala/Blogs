@@ -124,7 +124,7 @@ export class ChangeProfileComponent implements OnInit {
         image: this.selectedImage
       }
     }
-    if (userData.language && userData.language.includes(',')) {
+    if (userData.language != '' && userData.language.includes(',')) {
       let data:Values = {
         user:this.user,
         data: userData
