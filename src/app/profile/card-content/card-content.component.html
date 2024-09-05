@@ -1,8 +1,12 @@
 <div class="user-content">
     <div class="blogs-wrap">
         <div class="title-wrap">
-            Your blog's
-            <button (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
+            @if (url ==userName) {
+                Your blog's
+            } @else {
+                Blog's
+            }
+            <button *ngIf="url == userName" (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
         </div>
         <div class="blogs-list-wrap">
             <ul class="blogs-list">

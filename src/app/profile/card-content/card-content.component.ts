@@ -22,7 +22,16 @@ export class CardContentComponent implements OnInit {
         }
       }
     })
+    if(this.serice.currentUserData) {
+      this.userName = this.serice.currentUserData.uniqueName
+    } else {
+      this.userName = ''
+    }
+    this.url = this.router.url.split('/')[1]
+    console.log(this.userName, this.url)
   }
+  url!:string
+  userName!:string
   posts!:Posts[]
 
   addBlogs() {
