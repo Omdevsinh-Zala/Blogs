@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="registerForm" class="form" (submit)="registerUser()">
+  <form [formGroup]="registerForm" class="form" (ngSubmit)="registerUser()">
     <div class="error-wrap" *ngIf="error$ | async">
       <p class="error-text"><mat-icon>cancel</mat-icon>{{ error$ | async }}</p>
     </div>
@@ -15,7 +15,11 @@
             placeholder="Enter your unique name..."
           />
         </fieldset>
-      </div>
+        <div *ngIf="registerForm.get('uniqueName')!.invalid && (registerForm.get('uniqueName')!.touched  && registerForm.get('uniqueName')!.dirty)">
+          <div *ngIf="registerForm.get('uniqueName')!.hasError('forbiddenName')" class="error">Name must not include ' - '</div>
+          <div *ngIf="registerForm.get('uniqueName')!.hasError('required')" class="error">This field is required</div>
+          </div>
+        </div>
       <div class="formfeilds-wrap">
         <fieldset class="feildset">
             <label>Email</label>
@@ -26,6 +30,10 @@
             placeholder="Enter your email..."
           />
         </fieldset>
+        <div *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.touched && registerForm.get('email')!.dirty)">
+          <div *ngIf="registerForm.get('email')!.hasError('email')" class="error">Enter correct email formate</div>
+          <div *ngIf="registerForm.get('email')!.hasError('required')" class="error">This field is required</div>
+        </div>
       </div>
       <div class="formfeilds-wrap">
         <fieldset class="feildset">
@@ -42,12 +50,16 @@
             }}</mat-icon></span
           >
         </fieldset>
+        <div *ngIf="registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty && registerForm.get('password')!.dirty)">
+          <div *ngIf="registerForm.get('password')!.hasError('minlength')" class="error">Password must be minimum of 8 length`</div>
+          <div *ngIf="registerForm.get('password')!.hasError('required')" class="error">This field is required</div>
+        </div>
       </div>
       <div class="btn-wrap">
         @if(loading$ | async) {
         <mat-spinner class="spinner" color="warn"></mat-spinner>
         } @else {
-        <button [disabled]="!registerForm.valid" class="btn submit-btn">
+        <button matRipple [disabled]="!registerForm.valid" class="btn submit-btn">
           Register
         </button>
         }

@@ -83,17 +83,21 @@
   }
   .btn-wrap {
     position: absolute;
+    z-index: 2;
     top: 10px;
     right: 10px;
-    display: none;
+    display: flex;
     flex-direction: row;
     gap: 12px;
-    z-index: 4;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s linear, transform 0.2s linear;
     .remove-btn {
       margin: 0;
       padding: 6px 20px;
       background-color: rgba(255, 39, 39, 0.801);
       border: none;
+      border-radius: 4px;
       &:hover {
         outline: 2px solid rgba(255, 39, 39, 0.801);
         outline-offset: 2px;
@@ -104,6 +108,7 @@
       padding: 6px 20px;
       background-color: cornflowerblue;
       border: none;
+      border-radius: 4px;
       &:hover {
         outline: 2px solid cornflowerblue;
         outline-offset: 2px;
@@ -115,7 +120,8 @@
   }
   &:hover {
     .btn-wrap {
-      display: flex;
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

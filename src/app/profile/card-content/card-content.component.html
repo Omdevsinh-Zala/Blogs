@@ -3,7 +3,7 @@
         <div class="title-wrap">
             @if (url == (userName | async)?.uniqueName) {
                 Your blog's
-                <button (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
+                <button matRipple (click)="addBlogs()" class="btn add-blog"><mat-icon>add</mat-icon>Add Blog</button>
             } @else {
                 Blog's
             }
@@ -19,8 +19,8 @@
                         <li class="blogs">
                             <app-card [post]="post" class="card" ></app-card>
                             <div *ngIf="url == (userName | async)?.uniqueName" class="btn-wrap">
-                                <button class="btn remove-btn" (click)="removeBlog(post.id)" ><mat-icon>delete_outline</mat-icon></button>
-                                <!-- <button class="btn edit-btn"><mat-icon>edit</mat-icon></button> -->
+                                <button matRipple class="btn remove-btn" (click)="removeBlog(post.id)" ><mat-icon>delete_outline</mat-icon></button>
+                                <!-- <button matRipple class="btn edit-btn"><mat-icon>edit</mat-icon></button> -->
                             </div>
                         </li>
                     } @empty {

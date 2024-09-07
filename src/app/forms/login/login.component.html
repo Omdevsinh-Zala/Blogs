@@ -39,7 +39,7 @@
         @if(loading$ | async) {
         <mat-spinner class="spinner" color="warn"></mat-spinner>
         } @else {
-        <button [disabled]="!loginGroup.valid" class="btn submit-btn">
+        <button matRipple [disabled]="!loginGroup.valid" class="btn submit-btn">
           Login
         </button>
         }

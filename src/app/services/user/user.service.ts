@@ -45,6 +45,9 @@ export class UserService {
   currentUserData!: Users;
   userDataForAuth!: string;
   lastUrl!: string;
+  private urlForProfile = new ReplaySubject<string>(1)
+  urlProfile$ = this.urlForProfile.asObservable()
+  
 
   setUser() {
     this.currentUser.subscribe({
@@ -154,7 +157,6 @@ export class UserService {
 
   //For getting data on profile page
   setUserProfile(time: boolean) {
-    console.log(time)
     const userData = query(this.userRef);
     onValue(userData, (snapshot) => {
       const data: { [key: string]: Users } = snapshot.val();
@@ -213,5 +215,9 @@ export class UserService {
       updateProfile(this.firebaseAuth.currentUser!, { photoURL: data })
     );
     return from(promise);
+  }
+
+  urlUpdate(data:string) {
+    return this.urlForProfile.next(data)
   }
 }

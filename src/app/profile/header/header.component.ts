@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from '../../models/users';
 import { UserService } from '../../services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,8 @@ import { UserService } from '../../services/user/user.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private service:UserService) {
+  constructor(private router:Router) {
   }
-  user$ = this.service.currentUser$
+  url = this.router.url.split('/')[1]
   @Input() databaseUser$!:Observable<Users | null>
 }

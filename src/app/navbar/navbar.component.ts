@@ -67,6 +67,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.currentUser$.subscribe({
       next: (data) => {
         if(firstTime) {
+          this.user.lastUrl = data?.uniqueName!
+          this.user.urlUpdate(data?.uniqueName!)
           this.router.navigateByUrl(`/${data?.uniqueName}`);
         this.options = !this.options
         firstTime = false

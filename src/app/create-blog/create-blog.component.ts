@@ -1,5 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   Alignment,
   AutoImage,
@@ -51,19 +56,19 @@ import { CreateBlogStore } from './store/createBlog.store';
   selector: 'app-create-blog',
   templateUrl: './create-blog.component.html',
   styleUrl: './create-blog.component.scss',
-  providers:[CreateBlogStore]
+  providers: [CreateBlogStore],
 })
 export class CreateBlogComponent {
   constructor(
     private fb: FormBuilder,
-    private service:UserService,
-    private stor:Store,
-    private errorRemover:ClearErrorService,
-    private component:CreateBlogStore
+    private service: UserService,
+    private stor: Store,
+    private errorRemover: ClearErrorService,
+    private component: CreateBlogStore
   ) {
     this.form = this.fb.group({
-      title: new FormControl('',[Validators.required]),
-      content: new FormControl('',[Validators.required]),
+      title: new FormControl('', [Validators.required]),
+      content: new FormControl('', [Validators.required]),
     });
   }
   dialog = inject(MatDialog);
@@ -159,65 +164,66 @@ export class CreateBlogComponent {
   };
 
   tags = this.fb.group({
-    tag: new FormControl('',Validators.required)
-  })
+    tag: new FormControl('', Validators.required),
+  });
 
   addTag() {
-    if(this.tags.value.tag?.trim() == '') {
-      this.stor.dispatch(loginActions.faliure({error: 'Enter valid tags'}))
-      this.errorRemover.cleareError()
-      this.tags.reset()
+    if (this.tags.value.tag?.trim() == '') {
+      this.stor.dispatch(loginActions.faliure({ error: 'Enter valid tags' }));
+      this.errorRemover.cleareError();
+      this.tags.reset();
     } else {
-      const tag = this.tags.value.tag?.trim().toLowerCase()!
-      this.tagsArray.push(tag)
-      this.tags.reset()
+      const tag = this.tags.value.tag?.trim().toLowerCase()!;
+      this.tagsArray.push(tag);
+      this.tags.reset();
     }
   }
 
-  tagsArray:string[] = []
-  refreshChips(data:string) {
-    const index = this.tagsArray.findIndex((tag) => tag == data)
-    if(index >= 0) {
-      this.tagsArray.splice(index, 1)
+  tagsArray: string[] = [];
+  refreshChips(data: string) {
+    const index = this.tagsArray.findIndex((tag) => tag == data);
+    if (index >= 0) {
+      this.tagsArray.splice(index, 1);
     }
   }
 
   loading$ = this.component.loading$;
-  success$ = this.component.success$
+  success$ = this.component.success$;
 
   uploadBlog() {
-    const data: {title:string, content:string} = this.form.getRawValue();
+    const data: { title: string; content: string } = this.form.getRawValue();
     const date = new Date();
-    const postData:Posts = {
+    const postData: Posts = {
       title: data.title,
       body: data.content,
       id: '',
       created: date.getTime(),
-      reactions: {likes: ''},
+      reactions: { likes: '' },
       tags: this.tagsArray,
       user: this.service.currentUserData.uniqueName,
       useremail: this.service.currentUserData.email,
       image: this.service.currentUserData.image,
-      views: []
-    }
-    this.component.uploadBlog(postData)
+      views: [],
+      titleForRouter: `${data.title}-${date.getTime()}`
+    };
+    this.component.uploadBlog(postData);
     this.success$.subscribe({
-      next:(data) => {
-        if(data == true) {
-          this.form.reset()
-          this.tags.reset()
-          this.tagsArray = []
+      next: (data) => {
+        if (data == true) {
+          this.form.reset();
+          this.tags.reset();
+          this.tagsArray = [];
         }
-      }
-    })
+      },
+    });
   }
 
   previewBlog() {
     const data = {
       title: this.form.getRawValue().title,
       content: this.form.getRawValue().content,
-      tags: this.tagsArray
-    }
+      tags: this.tagsArray,
+    };
     this.dialog.open(PreviewComponent, {
       data: data,
       height: '800px',

@@ -8,7 +8,8 @@ export interface Posts {
   user: string;
   useremail: string;
   image:string
-  created:number
+  created:number,
+  titleForRouter: string
 }
 
 export interface reaction {

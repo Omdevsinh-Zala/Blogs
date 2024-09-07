@@ -33,6 +33,7 @@ import {
 } from '@angular/material/dialog';
 import { PreviewComponent } from './dialogbox/preview/preview.component';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import {MatChipsModule} from '@angular/material/chips';
     EffectsModule.forRoot([LoginEffect, ProfileEffrects]),
     CKEditorModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatRippleModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -167,7 +167,7 @@
               @if(loading$ | async) {
               <mat-spinner class="spinner" color="warn"></mat-spinner>
               } @else {
-              <button class="btn update-btn" (click)="updateProfile()">
+              <button matRipple class="btn update-btn" (click)="updateProfile()">
                 Update
               </button>
               }
@@ -178,7 +178,7 @@
               <img class="img" [src]="(user$ | async)?.image" #img />
             </div>
             <div class="icon-wrap">
-              <mat-icon (click)="showImages()">camera</mat-icon>
+              <mat-icon matRipple (click)="showImages()">camera</mat-icon>
             </div>
           </div>
         </div>

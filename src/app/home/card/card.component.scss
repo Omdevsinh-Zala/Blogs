@@ -12,6 +12,10 @@
     padding: 0 6px;
     .title-wrap {
       font-size: 38px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
     .tag-wrap {
       display: flex;

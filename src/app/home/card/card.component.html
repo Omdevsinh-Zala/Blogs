@@ -14,7 +14,7 @@
   </mat-card-header>
   <mat-card-content class="content">
     <div class="title-wrap">
-      {{ post.title }}
+      <a routerLink="/{{post.titleForRouter}}" (click)="updateUrl(post.titleForRouter)" class="post-title">{{ post.title }}</a>
     </div>
     <div class="tag-wrap">
       @for (tag of post.tags; track tag) {

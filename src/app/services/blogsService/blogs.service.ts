@@ -6,6 +6,7 @@ import { from, ReplaySubject } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
+import { Users } from '../../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class BlogsService {
   private Postref = ref(this.db, 'posts')
   private userPosts = new ReplaySubject<Posts | null>()
   private userPosts$ = this.userPosts.asObservable()
+  private blogPostedUser = new ReplaySubject<Users>()
+  blogPostedUser$ = this.blogPostedUser.asObservable()
 
   posBlog(data: Posts) {
     const newPostRef = push(this.Postref)
@@ -74,6 +77,20 @@ export class BlogsService {
           this.http.patch(`${environment.firebaseConfig.databaseURL}/users/${this.service.currentUserData.id}/posts.json`,newData).subscribe()
         }
       }
+    })
+  }
+
+  loadBlogData() {
+    return this.http.get<{[key:string]:Posts}>(`${environment.firebaseConfig.databaseURL}/posts.json`)
+  }
+
+  getBlogUser(data:string) {
+    const databaseRef = ref(this.db, `users`)
+    const newRef = query(databaseRef)
+    onValue(newRef, (snapshot) => {
+      const userDatabase:Users[] = Object.values(snapshot.val());
+      const user = userDatabase.filter((users) => users.uniqueName === data)
+      return this.blogPostedUser.next(user[0])
     })
   }
 }
