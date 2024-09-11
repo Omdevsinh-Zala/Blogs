@@ -78,17 +78,13 @@
     // card-skills end
     // card-info statr
     .card-info {
-      display: flex;
-      justify-content: center;
-      .user-info {
-        max-width: 70%;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
+      width: 100%;
+      .user-info-list {
         .info-wrap {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          justify-content: center;
           align-items: center;
           gap: 20px;
           .location-info,
@@ -99,61 +95,57 @@
             gap: 8px;
             align-items: center;
           }
-        }
-        .profile-links-wrap {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(25%,1fr));
-            .gitHub-link,
-            .twitter-link,
-            .facebook-link,
-            .instagram-link {
-              display: flex;
-              flex-direction: row;
-              gap: 8px;
-              align-items: center;
-              .link {
-                text-decoration: none;
-                color: black;
-              }
-              &:hover {
-                cursor: pointer;
-              }
+          .gitHub-link,
+          .twitter-link,
+          .facebook-link,
+          .instagram-link {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+            .link {
+              text-decoration: none;
+              color: black;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+            svg {
+              opacity: 0.6;
+            }
+          }
+          .gitHub-link {
+            &:hover {
               svg {
-                opacity: 0.6;
+                fill: black;
+                opacity: 1;
               }
             }
-            .gitHub-link {
-              &:hover {
-                svg {
-                  fill: black;
-                  opacity: 1;
-                }
+          }
+          .twitter-link {
+            &:hover {
+              svg {
+                fill: black;
+                opacity: 1;
               }
             }
-            .twitter-link {
-              &:hover {
-                svg {
-                  fill: black;
-                  opacity: 1;
-                }
+          }
+          .facebook-link {
+            &:hover {
+              svg {
+                fill: rgb(58, 116, 243);
+                opacity: 1;
               }
             }
-            .facebook-link {
-              &:hover {
-                svg {
-                  fill: rgb(58, 116, 243);
-                  opacity: 1;
-                }
+          }
+          .instagram-link {
+            &:hover {
+              svg {
+                fill: rgb(240, 115, 200);
+                opacity: 1;
               }
             }
-            .instagram-link {
-              &:hover {
-                svg {
-                  fill: rgb(240, 115, 200);
-                  opacity: 1;
-                }
-              }
-            }
+          }
         }
       }
     }
@@ -179,4 +171,11 @@
   .profile-links-wrap {
     justify-content: space-evenly;
     width: 100%;
+  }
+  .mailLink {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }

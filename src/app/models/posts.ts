@@ -6,6 +6,7 @@ export interface Posts {
   reactions: reaction;
   views: number[];
   user: string;
+  userId:string
   useremail: string;
   image:string
   created:number,

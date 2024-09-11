@@ -2,7 +2,6 @@
   <div *ngIf="loading$ | async" class="loading-wrap">
     <mat-spinner></mat-spinner>
   </div>
-  @if ((access$ | async) === 'user') {
   <div *ngIf="!(loading$ | async)" class="card">
     <app-header [databaseUser$]="databaseUser$" ></app-header>
     <div class="card-content-wrap">
@@ -14,45 +13,4 @@
         </div>
     </div>
   </div>
-} @else if ((access$ | async) === 'blog') {
-  <div *ngIf="!(loading$ | async)" class="page-wrap">
-    <div class="first-wrap">
-      <div class="blog-wrap">
-        <div class="posted-user-wrap">
-          <div class="image-wrap">
-            <img class="user-avatar" src="{{(blog$ | async)?.image}}" />
-          </div>
-          <div class="user-extra-wrap">
-            <div class="user-name">
-              <a class="link" routerLink="/{{(blog$ | async)?.user}}">{{(blog$ | async)?.user?.at(0)?.toUpperCase() + (blog$ | async)?.user?.slice(1)!}}</a>
-            </div>
-            <div class="blog-time">
-              Posted on {{(blog$ | async)?.created | date }}
-            </div>
-          </div>
-        </div>
-        <div class="blog-header-wrap">
-          <h1 class="title">
-            {{(blog$ | async)?.title}}
-          </h1>
-          <div class="tag-wrap">
-            @for (tag of (blog$ |async)?.tags; track tag) {
-              <div class="tag"  [ngClass]="tagClasses[tag]">
-                <span>#</span>{{tag}}
-              </div>
-            }
-          </div>
-        </div>
-        <div class="blog-content-wrap">
-          <article [innerHTML]="sanitize.bypassSecurityTrustHtml((blog$ | async)?.body!)" class="main"></article>
-        </div>
-      </div>
-    </div>
-    <div class="second-wrap">
-      <div class="user-wrap">
-        <app-header [databaseUser$]="blogPostedUser$" ></app-header>
-      </div>
-    </div>
-  </div>
-}
 </div>

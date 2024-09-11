@@ -1,0 +1,62 @@
+<div class="container">
+    <div *ngIf="loading$ | async" class="loading-wrap">
+        <mat-spinner></mat-spinner>
+      </div>
+    <ng-container *ngrxLet="blog$ as blog">
+        <div class="main-wrap">
+            <div *ngIf="!(loading$ | async)" class="page-wrap">
+                <div class="first-wrap">
+                  <div class="blog-wrap">
+                    <div class="posted-user-wrap">
+                      <div class="image-wrap">
+                        <img class="user-avatar" src="{{blog?.image}}" />
+                      </div>
+                      <div class="user-extra-wrap">
+                        <div class="user-name">
+                          <a class="link" routerLink="/{{blog?.user}}">{{blog?.user?.at(0)?.toUpperCase() + blog?.user?.slice(1)!}}</a>
+                        </div>
+                        <div class="blog-time">
+                          Posted on {{blog?.created | date }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="blog-header-wrap">
+                      <h1 class="title">
+                        {{blog?.title}}
+                      </h1>
+                      <div class="tag-wrap">
+                        @for (tag of blog?.tags; track tag) {
+                          <div class="tag"  [ngClass]="tagClasses[tag]">
+                            <span>#</span>{{tag}}
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="blog-content-wrap">
+                      <article [innerHTML]="sanitize.bypassSecurityTrustHtml(blog?.body!)" class="main"></article>
+                    </div>
+                  </div>
+                </div>
+                <div class="second-wrap">
+                  <div class="user-wrap">
+                    <app-header [databaseUser$]="blogUser$" ></app-header>
+                  </div>
+                  <div *ngIf="(blogUser$ | async)?.posts?.userPosts?.split(',')?.length! > 1" class="more-user-blogs-wrap">
+                    <div class="heading-title">
+                        More blogs from <span class="user">{{(blogUser$ | async)?.uniqueName}}</span>
+                    </div>
+                    <ul class="blogs-list">
+                        @for (blog of (blogUser$ | async)?.posts?.userPosts?.split(','); track $index) {
+                            <li *ngIf="url != blog" class="blogs">
+                                <div class="more-blog">
+                                    <app-blog-card [title]="blog"></app-blog-card>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

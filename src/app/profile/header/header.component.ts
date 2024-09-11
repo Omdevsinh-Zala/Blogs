@@ -12,6 +12,6 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router:Router) {
   }
-  url = this.router.url.split('/')[1]
+  url = this.router.url.split('/')
   @Input() databaseUser$!:Observable<Users | null>
 }

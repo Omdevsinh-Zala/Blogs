@@ -51,6 +51,7 @@ import { ClearErrorService } from '../services/clearError/clear-error.service';
 import { loginActions } from '../store/app.actions';
 import { BlogsService } from '../services/blogsService/blogs.service';
 import { CreateBlogStore } from './store/createBlog.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-blog',
@@ -64,7 +65,8 @@ export class CreateBlogComponent {
     private service: UserService,
     private stor: Store,
     private errorRemover: ClearErrorService,
-    private component: CreateBlogStore
+    private component: CreateBlogStore,
+    private router:Router
   ) {
     this.form = this.fb.group({
       title: new FormControl('', [Validators.required]),
@@ -192,6 +194,7 @@ export class CreateBlogComponent {
 
   uploadBlog() {
     const data: { title: string; content: string } = this.form.getRawValue();
+    const title = data.title.split(' ').join('_')
     const date = new Date();
     const postData: Posts = {
       title: data.title,
@@ -201,18 +204,20 @@ export class CreateBlogComponent {
       reactions: { likes: '' },
       tags: this.tagsArray,
       user: this.service.currentUserData.uniqueName,
+      userId: this.service.currentUserData.id.toString(),
       useremail: this.service.currentUserData.email,
       image: this.service.currentUserData.image,
       views: [],
-      titleForRouter: `${data.title}-${date.getTime()}`
+      titleForRouter: `${title}-${date.getTime()}`
     };
     this.component.uploadBlog(postData);
     this.success$.subscribe({
-      next: (data) => {
-        if (data == true) {
+      next: (value) => {
+        if (value == true) {
           this.form.reset();
           this.tags.reset();
           this.tagsArray = [];
+          this.router.navigateByUrl(`/${postData.user}`)
         }
       },
     });

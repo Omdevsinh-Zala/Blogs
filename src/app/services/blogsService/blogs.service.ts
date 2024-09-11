@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Database, onValue, push, set } from '@angular/fire/database';
 import { query, ref } from 'firebase/database';
 import { Posts } from '../../models/posts';
-import { from, ReplaySubject } from 'rxjs';
+import { from, of, ReplaySubject } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
@@ -80,8 +80,9 @@ export class BlogsService {
     })
   }
 
-  loadBlogData() {
-    return this.http.get<{[key:string]:Posts}>(`${environment.firebaseConfig.databaseURL}/posts.json`)
+  loadBlogData(value:string) {
+    return of(query(ref(this.db, `posts/${value}`)))
+    // return this.http.get<{[key:string]:Posts}>(`${environment.firebaseConfig.databaseURL}/posts.json`)
   }
 
   getBlogUser(data:string) {

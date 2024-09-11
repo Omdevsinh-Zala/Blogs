@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Posts } from '../../models/posts';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, from, map, of, skip, take, tap, toArray } from 'rxjs';
 import { PostsService } from '../../services/postService/posts.service';
 import { FirebaseError } from 'firebase/app';
+import { onValue } from '@angular/fire/database';
 
 interface InitialState {
   posts: Posts[] | null;
@@ -23,8 +24,6 @@ export class HomeStore extends ComponentStore<InitialState> {
     super(initialState);
   }
 
-  keys: string[] = [];
-
   loading$ = this.select((state) => state.loading);
   error$ = this.select((state) => state.error);
   posts$ = this.select((state) => state.posts);
@@ -40,7 +39,6 @@ export class HomeStore extends ComponentStore<InitialState> {
     loading: false,
     error: error,
   }));
-
   private loadPosts$ = this.effect((event$) => {
     return event$.pipe(
       tap(() => {
@@ -49,17 +47,8 @@ export class HomeStore extends ComponentStore<InitialState> {
       exhaustMap(() => {
         return this.service.getAllPosts().pipe(
           map((data) => {
-            this.keys = Object.keys(data);
-            return Object.values(data);
-          }),
-          map((data) => {
-            this.keys.forEach((key, i) => {
-              data[i] = {
-                ...data[i],
-                id: key,
-              };
-            });
-            this.setPosts(data)
+            const posts:Posts[] = Object.values(data)
+            this.setPosts(posts)
           }),
           catchError((err:FirebaseError) => {
             this.setError(err.code.split('/')[1])

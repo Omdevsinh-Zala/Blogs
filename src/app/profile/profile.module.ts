@@ -11,13 +11,18 @@ import { CardContentComponent } from './card-content/card-content.component';
 import { CardExtraComponent } from './card-extra/card-extra.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { SharedModule } from '../shared module/shared.module';
+import { LetDirective, PushPipe } from '@ngrx/component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { BlogCardComponent } from './blog-page/blog-card/blog-card.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     HeaderComponent,
     CardContentComponent,
-    CardExtraComponent
+    CardExtraComponent,
+    BlogPageComponent,
+    BlogCardComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +33,8 @@ import { SharedModule } from '../shared module/shared.module';
     MatProgressSpinner,
     AsyncPipe,
     SharedModule,
+    LetDirective,
+    PushPipe
   ]
 })
 export class ProfileModule { }

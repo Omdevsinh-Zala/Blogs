@@ -3,10 +3,24 @@
         <nav class="navbar" #navbar>
             <div class="first-wrap">
                 <div class="logo">
-                    Blogs
+                    <a class="link" routerLink="/Home" >Blogs</a>
                 </div>
                 <div class="search-wrap">
-                    <input type="search" id="search" placeholder="search here...">
+                    <input type="search" (input)="search(input.value)" id="search" class="search" placeholder="Search here..." #input>
+                    <div class="search-result" [ngStyle]="{ height : (blogTitles$ | async)?.length != 0 ? (80 * ((blogTitles$ | async)?.length!)) + 'px' : '0px', display: (blogTitles$ | async)?.length != 0 ? 'block' : 'none', border: (blogTitles$ | async)?.length != 0 ? '1px solid rgba(0,0,0,0.3)' : 'none'}">
+                        <ul class="title-list">
+                            @for(blog of (blogTitles$ | async);track blog.title) {
+                                <li class="titles" >
+                                    <div class="title">
+                                        <a class="link" routerLink="/{{blog.user}}/{{blog.id}}" (click)="hideSearches(input.value = '')" >{{blog.title}}</a>
+                                    </div>
+                                    <div class="posted-user">
+                                        Posted by:- <span class="user">{{blog.user}}</span>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="second-wrap">

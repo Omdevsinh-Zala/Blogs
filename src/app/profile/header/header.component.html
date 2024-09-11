@@ -19,56 +19,70 @@
         class="last-name-wrap"
         [ngStyle]="{ opacity: (databaseUser$ | async)?.lastName ? 1 : 0.5 }"
       >
+      @if ((databaseUser$ | async)?.uniqueName === url[1] && (url[2] === undefined)) {
         {{
           (databaseUser$ | async)?.lastName
             ? (databaseUser$ | async)?.lastName
             : "****"
         }}
+      } @else {
+        {{(databaseUser$ | async)?.lastName}}
+      }
       </div>
     </div>
   </div>
-  <div class="card-bio">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined) || (databaseUser$ | async)?.bio" class="card-bio">
     <div class="user-bio">
       <div class="bio">
-        {{
-          (databaseUser$ | async)?.bio
-            ? (databaseUser$ | async)?.bio
-            : "Add your bio to let people know about you more"
-        }}
+        @if ((databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined)) {
+          {{
+            (databaseUser$ | async)?.bio
+              ? (databaseUser$ | async)?.bio
+              : "Add your bio to let people know about you more."
+          }}
+        } @else {
+          {{(databaseUser$ | async)?.bio}}
+        }
       </div>
     </div>
   </div>
-  <div class="card-skills">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined) || (databaseUser$ | async)?.skills" class="card-skills">
     <div class="user-skills">
       <div class="skills">
-        {{
-          (databaseUser$ | async)?.skills
-            ? (databaseUser$ | async)?.skills
-            : "Add your skills to flex them and let people know how skilled you're."
-        }}
+        @if ((databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined)) {
+          {{
+            (databaseUser$ | async)?.skills
+              ? (databaseUser$ | async)?.skills
+              : "Add your skills to flex them and let people know how skilled you're."
+          }}
+        } @else {
+          {{(databaseUser$ | async)?.skills}}
+        }
       </div>
     </div>
   </div>
   <div class="card-info">
-    <div class="user-info">
+    <div class="user-info-list">
       <div class="info-wrap">
-        <div class="location-info">
+        <div *ngIf="(databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined) || (databaseUser$ | async)?.location" class="location-info">
           <mat-icon class="icon">location_city</mat-icon>
-          {{
-            (databaseUser$ | async)?.location
-              ? (databaseUser$ | async)?.location
-              : "Add your loaction"
-          }}
+          @if ((databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined)) {
+            {{
+              (databaseUser$ | async)?.location
+                ? (databaseUser$ | async)?.location
+                : "Add your loaction"
+            }}
+          } @else {
+            {{(databaseUser$ | async)?.location}}
+          }
         </div>
         <div class="joined-info">
           <mat-icon>cake</mat-icon>Joined On:
           {{ (databaseUser$ | async)?.accountCreated | date }}
         </div>
         <div *ngIf="(databaseUser$ | async)?.workEmail" class="workEmail-info">
-          <mat-icon>email</mat-icon>{{ (databaseUser$ | async)?.workEmail }}
+          <a class="mailLink" href="mailto:{{(databaseUser$ | async)?.workEmail}}" ><mat-icon>email</mat-icon>{{ (databaseUser$ | async)?.workEmail }}</a>
         </div>
-      </div>
-      <div class="profile-links-wrap">
         @if((databaseUser$ | async)) { @for(links of (databaseUser$ |
         async)?.socialLinks; track $index) {
         <div class="gitHub-link" *ngIf="links.gitHub">
@@ -187,15 +201,19 @@
       </div>
     </div>
   </div>
-  <div class="card-work">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined)" class="card-work">
     <div class="user-work">
       Work
       <div class="work">
-        {{
-          (databaseUser$ | async)?.work
-            ? (databaseUser$ | async)?.work
-            : "Share your work with others"
-        }}
+        @if ((databaseUser$ | async)?.uniqueName == url[1] && (url[2] === undefined)) {
+          {{
+            (databaseUser$ | async)?.work
+              ? (databaseUser$ | async)?.work
+              : "Share your work with others"
+          }}
+        } @else {
+          {{(databaseUser$ | async)?.work}}
+        }
       </div>
     </div>
   </div>

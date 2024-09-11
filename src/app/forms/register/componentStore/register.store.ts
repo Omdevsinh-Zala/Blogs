@@ -56,7 +56,6 @@ export class RegisterStore extends ComponentStore<UserRegisterState> {
       }),
       exhaustMap((user) => {
         return this.registerService.FirebaseRegister(user).pipe(
-          delay(1000),
           map((data) => {
             this.unsetLoading();
             this.nullError();

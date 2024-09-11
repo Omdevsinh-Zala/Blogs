@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Posts } from '../../models/posts';
 import { CardStore } from './store/card.store';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from '../../services/user/user.service';
   providers:[CardStore]
 })
 export class CardComponent implements OnInit {
-  constructor(private service:UserService){}
+  constructor(private service:UserService, private router:Router){}
   @Input() post!:Posts
 
   tagClasses:{[tag:string]:string} = {}
@@ -27,9 +27,5 @@ export class CardComponent implements OnInit {
     const number = Math.floor(Math.random()*classes.length);
     return classes[number]
   }
-
-  updateUrl(data:string) {
-    this.service.urlUpdate(data)
-  }
-
+  url = this.router.url.split('/')[1]
 }

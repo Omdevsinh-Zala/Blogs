@@ -39,28 +39,4 @@ export class ProfileEffrects {
       })
     );
   });
-
-  loadBlog$ = createEffect(() => {
-    return this.actio$.pipe(
-      ofType(profileActions.loadBlog),
-      switchMap(({ title: data }) => {
-        return this.blogService.loadBlogData().pipe(
-          map((blogs) => {
-            const blogsData = Object.values(blogs);
-            const blogData = blogsData.filter(
-              (blogs) => blogs.titleForRouter === data
-            );
-            if (blogData.length != 0) {
-              this.blogService.getBlogUser(blogData[0].user)
-              return profileActions.blogSuccess({ Blog: blogData[0] });
-            } else {
-              this.router.navigateByUrl('/Home');
-              this.clearError.cleareError();
-              return loginActions.faliure({ error: 'Blog not exists' });
-            }
-          })
-        );
-      })
-    );
-  });
 }

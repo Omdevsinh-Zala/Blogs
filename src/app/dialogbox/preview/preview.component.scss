@@ -25,38 +25,40 @@
 }
 ::ng-deep h1 {
   display: block;
-  font-size: 30px;
-  line-height: 28px;
-  font-weight: 600;
+  font-size: 48px;
+  line-height: 50px;
+  font-weight: 700;
   padding: 10px 0;
 }
 ::ng-deep h2 {
   display: block;
   font-size: 26px;
   line-height: 26px;
-  font-weight: 500;
-  padding: 10px 0;
+  font-weight: 600;
+  margin: 20px 0 5px;
 }
 ::ng-deep h3 {
   display: block;
-  font-size: 23px;
-  line-height: 24px;
-  font-weight: 500;
-  padding: 10px 0;
+  font-size: 25px;
+  line-height: 27px;
+  font-weight: 600;
+  margin: 20px 0 5px;
 }
 ::ng-deep h4 {
   display: block;
   font-size: 20px;
   line-height: 22px;
-  font-weight: 500;
-  padding: 10px 0;
+  font-weight: 600;
+  margin: 20px 0 5px;
 }
 ::ng-deep p {
   display: block;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 23px;
+  line-height: 30px;
   font-weight: 400;
-  padding: 10px 0;
+  margin: 5px 0 10px;
+
+  text-align: justify;
 }
 ::ng-deep ul {
   display: flex;
@@ -79,6 +81,18 @@
   margin: 10px auto;
   max-width: 100%;
   height: auto;
+}
+.blog-content-wrap {
+  margin-top: 35px;
+}
+::ng-deep figure {
+  display: flex;
+  margin: 0 auto;
+  width: 100% !important;
+  height: auto;
+}
+::ng-deep code {
+  font-size: 15px;
 }
 .tag-wrap {
   display: flex;

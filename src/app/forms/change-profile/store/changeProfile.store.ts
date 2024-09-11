@@ -27,7 +27,7 @@ export interface Values {
 
 @Injectable()
 export class ChangeProfileStore extends ComponentStore<Initialstate> {
-    constructor(private service:UserService, private store:Store, private errorService:ClearErrorService) {
+    constructor(private service:UserService, private store:Store, private errorService:ClearErrorService, private router:Router) {
         super(initialstate)
     }
 
@@ -44,15 +44,15 @@ export class ChangeProfileStore extends ComponentStore<Initialstate> {
             }),
             switchMap((data$) => {
                 return this.service.firebaseUpdateUser(data$.user, data$.data).pipe(
+                    delay(500),
                     map((data) => {
                         //Need to change in future
                         this.service.updateUserImage(data$.data.image!).pipe(
                         )
                     }),
-                    delay(1000),
                     map((data) => {
                         this.setLoading(false)
-                        // this.router.navigateByUrl(`${data$.user.uniqueName}`)
+                        this.router.navigateByUrl(`${data$.user.uniqueName}`)
                     }),
                     catchError((err:HttpErrorResponse) => {
                         this.store.dispatch(loginActions.faliure({error: err.error.error}))

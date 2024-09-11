@@ -162,11 +162,12 @@ export class UserService {
       const data: { [key: string]: Users } = snapshot.val();
       const users = Object.values(data);
       let name = this.router.url.split('/')[1];
-      if (this.lastUrl) {
+      if (this.lastUrl && time == false) {
         name = this.lastUrl;
       }
       const currentUser = users.filter((user) => user.uniqueName == name);
       if (time == true) {
+        console.log(name, this.lastUrl)
         this.userProfile.next(currentUser[0]);
         time = false;
       }
@@ -215,9 +216,5 @@ export class UserService {
       updateProfile(this.firebaseAuth.currentUser!, { photoURL: data })
     );
     return from(promise);
-  }
-
-  urlUpdate(data:string) {
-    return this.urlForProfile.next(data)
   }
 }

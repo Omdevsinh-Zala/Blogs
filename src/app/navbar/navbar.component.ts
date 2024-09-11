@@ -7,16 +7,18 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
+import { NavBarStore } from './componentStore/search.store';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
+  providers:[NavBarStore]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('navbar') hide!: ElementRef;
   @ViewChild('profileHide') opton!: ElementRef;
-  constructor(private router: Router, private user: UserService) {}
+  constructor(private router: Router, private user: UserService, private store:NavBarStore) {}
   user$ = this.user.currentUser$;
   currentUser = this.user.currentUserRef$;
   currentUser$ = this.user.currentUserRef$;
@@ -46,7 +48,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       },
     });
   }
-
+  blogTitles$ = this.store.titles$
   url: string = '';
 
   showOptions() {
@@ -68,7 +70,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       next: (data) => {
         if(firstTime) {
           this.user.lastUrl = data?.uniqueName!
-          this.user.urlUpdate(data?.uniqueName!)
           this.router.navigateByUrl(`/${data?.uniqueName}`);
         this.options = !this.options
         firstTime = false
@@ -102,6 +103,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }
       },
     });
+  }
+  timer:any
+  search(data:string) {
+    clearTimeout(this.timer)
+    this.timer = setTimeout(() => {
+      this.store.loadBlogTitles(data)
+    },500)
+  }
+
+  hideSearches(value: any) {
+    const data = ''
+    this.store.loadBlogTitles(data)
   }
 
   ngOnDestroy(): void {

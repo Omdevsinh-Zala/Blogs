@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Posts } from '../models/posts';
 import { PostsService } from '../services/postService/posts.service';
-import { HomeStore } from './store/home.store';
+import { HomeStore } from './ComponentStore/home.store';
+import { from, map, skip, take, toArray } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,17 +15,37 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.store.loadPosts()
   }
-  
+  limit:number = 10
   error$ = this.store.error$
   loading$ = this.store.loading$
-  posts$ = this.store.posts$
+  posts$ = this.store.posts$.pipe(
+    map((data) => {
+      return from(data!).pipe(
+        map((data) => {
+          return data
+        }),
+        // take(this.limit),
+        toArray()
+      )
+    })
+  )
 
   addPost(data: Posts) {
     // this.service.submitPost(data)
   }
 
   showMore() {
-    // this.post.limit = this.post.limit + 10
-    // this.post.getAllPosts()
+    this.limit += 10;
+    this.posts$ = this.store.posts$.pipe(
+      map((data) => {
+        return from(data!).pipe(
+          map((data) => {
+            return data
+          }),
+          take(this.limit),
+          toArray()
+        )
+      })
+    )
   }
 }
