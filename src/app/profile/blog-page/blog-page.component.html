@@ -46,7 +46,7 @@
                         More blogs from <span class="user">{{(blogUser$ | async)?.uniqueName}}</span>
                     </div>
                     <ul class="blogs-list">
-                        @for (blog of (blogUser$ | async)?.posts?.userPosts?.split(','); track $index) {
+                        @for (blog of (extraTitles$ | async); track $index) {
                             <li *ngIf="url != blog" class="blogs">
                                 <div class="more-blog">
                                     <app-blog-card [title]="blog"></app-blog-card>

@@ -3,7 +3,7 @@
         <mat-spinner></mat-spinner>
     </div>
     <div class="cards-wrap">
-        @for(post of ((posts$ | async) | async);track post.id) {
+        @for(post of ((posts$ | async) | async);track $index) {
             <app-card [post]="post" (click)="addPost(post)" ></app-card>
         }
     </div>

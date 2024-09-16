@@ -19,10 +19,10 @@ export class BlogPageComponent implements OnInit, OnDestroy {
           const values = url.url.split('/');
           const data = {title: values[2], user: values[1]}
           this.store.loadBlog(data)
+          this.url = this.router.url.split('/')[2]
         }
       }
     })
-    this.url = this.router.url.split('/')[2]
   }
   url!:string
   routerSub!:Subscription
@@ -30,6 +30,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
   loading$ = this.store.loading$
   sanitize = this.sanitizer
   blogUser$ = this.store.blogUser$
+  extraTitles$ = this.store.extraTitles$
   tagClasses:{[tag:string]:string} = {}
   ngOnInit(): void {
     this.blog$.pipe(

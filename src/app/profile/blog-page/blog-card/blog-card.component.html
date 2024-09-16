@@ -1,5 +1,5 @@
 <div class="user-blog">
     <div class="blog-title">
-        {{(blog$ | async)?.title}}
+        <a routerLink="/{{(blog$ | async)?.user}}/{{(blog$ | async)?.id}}" class="link-title">{{(blog$ | async)?.title}}</a>
     </div>
 </div>

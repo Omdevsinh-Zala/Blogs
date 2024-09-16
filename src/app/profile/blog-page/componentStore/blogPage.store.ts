@@ -16,13 +16,15 @@ import { Store } from "@ngrx/store"
 interface Initialstate {
     loading: boolean,
     blog: Posts | null,
-    blogUser: Users | null
+    blogUser: Users | null,
+    titles:string[]
 }
 
 const initialstate:Initialstate = {
     loading: false,
     blog: null,
-    blogUser: null
+    blogUser: null,
+    titles: []
 }
 
 @Injectable()
@@ -34,10 +36,12 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
     loading$ = this.select((state) => state.loading)
     blog$ = this.select((state) => state.blog)
     blogUser$ = this.select((state) => state.blogUser)
+    extraTitles$ = this.select((state) => state.titles)
 
     private setLoading = this.updater((state, value:boolean) => ({...state, loading: value}))
     private setBlogs = this.updater((state, data:Posts) => ({...state, blog:data}))
     private setBlogUser = this.updater((state, data:Users) => ({...state, blogUser:data}))
+    private setTiels = this.updater((state, data:string[]) => ({...state, titles:data}))
     private db = inject(Database)
     private loadBlog$ = this.effect((name$:Observable<{title: string, user:string}>) => {
         return name$.pipe(
@@ -56,6 +60,7 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
                                     if(userData[0] != null) {
                                         this.setBlogUser(userData[0])
                                         this.setLoading(false)
+                                        this.titles$('')
                                     } else {
                                         this.router.navigateByUrl('/Home');
                                         this.clearError.cleareError();
@@ -79,4 +84,22 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
     loadBlog(data:{title:string, user:string}) {
         this.loadBlog$(data)
     }
+
+    titles$ = this.effect((origin$:Observable<string>) => {
+        return origin$.pipe(
+            switchMap(() => {
+                return this.blogUser$.pipe(
+                    map((data) => {
+                        if(data?.posts.userPosts.includes(',')) {
+                            const titles = data?.posts.userPosts.split(',')
+                            this.setTiels(titles)
+                        } else {
+                            const title = data?.posts.userPosts!
+                            this.setTiels([title])
+                        }
+                    })
+                )
+            })
+        )
+    })
 }
