@@ -167,7 +167,6 @@ export class UserService {
       }
       const currentUser = users.filter((user) => user.uniqueName == name);
       if (time == true) {
-        console.log(name, this.lastUrl)
         this.userProfile.next(currentUser[0]);
         time = false;
       }

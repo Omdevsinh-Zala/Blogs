@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from '../../models/users';
 import { UserService } from '../../services/user/user.service';
@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-  constructor(private router:Router) {
+export class HeaderComponent implements OnInit {
+  constructor(private router:Router, private service:UserService) {
+  }
+  ngOnInit(): void {
   }
   url = this.router.url.split('/')
   @Input() databaseUser$!:Observable<Users | null>
+  currentUser = this.service.currentUserData
 }

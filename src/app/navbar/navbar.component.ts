@@ -119,6 +119,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // this.options = !this.options
-    // console.log('Destroy')
   }
 }

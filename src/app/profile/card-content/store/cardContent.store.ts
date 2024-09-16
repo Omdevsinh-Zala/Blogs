@@ -73,6 +73,7 @@ export class CardContentStore extends ComponentStore<Initialstate> {
               } else {
                 this.allPosts = [];
                 this.setPosts();
+                this.setLoading(false)
               }
             }
           })
@@ -83,6 +84,24 @@ export class CardContentStore extends ComponentStore<Initialstate> {
 
   getUserBlogs(data: string) {
     this.getUserPosts$(data);
+  }
+
+  private nullPosts$ = this.effect((data$:Observable<string>) => {
+    return data$.pipe(
+      tap(() => {
+        this.setLoading(true)
+        this.firstTime = false
+    }),
+    map(() => {
+      this.allPosts = []
+      this.setPosts()
+      this.setLoading(false)
+    })
+    )
+  })
+
+  nullPosts(data:string) {
+    this.nullPosts$(data)
   }
 
   private postId = ''

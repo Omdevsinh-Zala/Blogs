@@ -45,6 +45,8 @@ export class CardContentComponent implements OnInit {
             } else {
               this.store.getUserBlogs(value)
             }
+          } else {
+              this.store.nullPosts('')
           }
         }
       }

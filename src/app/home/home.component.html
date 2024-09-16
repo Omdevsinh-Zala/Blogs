@@ -4,7 +4,7 @@
     </div>
     <div class="cards-wrap">
         @for(post of ((posts$ | async) | async);track $index) {
-            <app-card [post]="post" (click)="addPost(post)" ></app-card>
+            <app-card [post]="post" ></app-card>
         }
     </div>
     <!-- <div class="showMore-wrap">

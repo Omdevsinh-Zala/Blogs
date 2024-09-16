@@ -24,15 +24,11 @@ export class HomeComponent implements OnInit {
         map((data) => {
           return data
         }),
-        // take(this.limit),
+        skip(1),
         toArray()
       )
     })
   )
-
-  addPost(data: Posts) {
-    // this.service.submitPost(data)
-  }
 
   showMore() {
     this.limit += 10;
