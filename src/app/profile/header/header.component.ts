@@ -9,10 +9,8 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(private router:Router, private service:UserService) {
-  }
-  ngOnInit(): void {
   }
   url = this.router.url.split('/')
   @Input() databaseUser$!:Observable<Users | null>
