@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,7 @@ import {
 import { PreviewComponent } from './dialogbox/preview/preview.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatRippleModule} from '@angular/material/core';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {MatRippleModule} from '@angular/material/core';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRippleModule
+    MatRippleModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), connectInZone: true })
   ],
   providers: [
     provideAnimationsAsync(),

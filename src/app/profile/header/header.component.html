@@ -19,7 +19,7 @@
         class="last-name-wrap"
         [ngStyle]="{ opacity: (databaseUser$ | async)?.lastName ? 1 : 0.5 }"
       >
-      @if ((databaseUser$ | async)?.uniqueName === currentUser.uniqueName && (url[2] === undefined)) {
+      @if ((databaseUser$ | async)?.uniqueName === (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined)) {
         {{
           (databaseUser$ | async)?.lastName
             ? (databaseUser$ | async)?.lastName
@@ -31,10 +31,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="(databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined) || (databaseUser$ | async)?.bio" class="card-bio">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined) || (databaseUser$ | async)?.bio" class="card-bio">
     <div class="user-bio">
       <div class="bio">
-        @if ((databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined)) {
+        @if ((databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined)) {
           {{
             (databaseUser$ | async)?.bio
               ? (databaseUser$ | async)?.bio
@@ -46,10 +46,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="(databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined) || (databaseUser$ | async)?.skills" class="card-skills">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined) || (databaseUser$ | async)?.skills" class="card-skills">
     <div class="user-skills">
       <div class="skills">
-        @if ((databaseUser$ | async)?.uniqueName == currentUser.uniqueName) {
+        @if ((databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '')) {
           {{
             (databaseUser$ | async)?.skills
               ? (databaseUser$ | async)?.skills
@@ -64,9 +64,9 @@
   <div class="card-info">
     <div class="user-info-list">
       <div class="info-wrap">
-        <div *ngIf="(databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined) || (databaseUser$ | async)?.location" class="location-info">
+        <div *ngIf="(databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined) || (databaseUser$ | async)?.location" class="location-info">
           <mat-icon class="icon">location_city</mat-icon>
-          @if ((databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined)) {
+          @if ((databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined)) {
             {{
               (databaseUser$ | async)?.location
                 ? (databaseUser$ | async)?.location
@@ -201,11 +201,11 @@
       </div>
     </div>
   </div>
-  <div *ngIf="(databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined)" class="card-work">
+  <div *ngIf="(databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined)" class="card-work">
     <div class="user-work">
       Work
       <div class="work">
-        @if ((databaseUser$ | async)?.uniqueName == currentUser.uniqueName && (url[2] === undefined)) {
+        @if ((databaseUser$ | async)?.uniqueName == (currentUser ? currentUser.uniqueName : '') && (url[2] === undefined)) {
           {{
             (databaseUser$ | async)?.work
               ? (databaseUser$ | async)?.work

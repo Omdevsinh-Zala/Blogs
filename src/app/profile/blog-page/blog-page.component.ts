@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { BlogPageStore } from './componentStore/blogPage.store';
 import { DomSanitizer } from '@angular/platform-browser';
 import { map, Subscription } from 'rxjs';

@@ -103,15 +103,20 @@
     gap: 3px;
     list-style: none;
     margin: 0 -5px;
+    font-size: 25px;
   }
   ::ng-deep ol {
     display: flex;
     flex-direction: column;
     gap: 3px;
     margin: 0 -5px;
+    font-size: 25px;
   }
   ::ng-deep li {
     padding: 5px;
+    font-size: 23px;
+    line-height: 30px;
+    font-weight: 400;
   }
   ::ng-deep img {
     display: block;
