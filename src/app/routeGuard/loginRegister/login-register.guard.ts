@@ -16,7 +16,7 @@ export const loginRegisterGuard: CanActivateFn = (route, state) => {
   })
   let user = localStorage.getItem('User')
   if(user) {
-    store.dispatch(loginActions.faliure({error: 'You are already login'}))
+    store.dispatch(loginActions.faliure({error: 'You are already logged in!'}))
     errorRemover.cleareError()
     return router.navigateByUrl(redirecUrl).then(() => false)
   }

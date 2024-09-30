@@ -9,6 +9,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Store } from "@ngrx/store";
 import { ClearErrorService } from "../../../services/clearError/clear-error.service";
 import { loginActions } from "../../../store/app.actions";
+import { PostsService } from "../../../services/postService/posts.service";
 
 interface Initialstate {
     mainLoading:boolean
@@ -27,7 +28,7 @@ export interface Values {
 
 @Injectable()
 export class ChangeProfileStore extends ComponentStore<Initialstate> {
-    constructor(private service:UserService, private store:Store, private errorService:ClearErrorService, private router:Router) {
+    constructor(private service:UserService, private store:Store, private errorService:ClearErrorService, private router:Router, private postSercie: PostsService) {
         super(initialstate)
     }
 
@@ -49,6 +50,18 @@ export class ChangeProfileStore extends ComponentStore<Initialstate> {
                         //Need to change in future
                         this.service.updateUserImage(data$.data.image!).pipe(
                         )
+                        if(data$.data.image) {
+                            const userPosts = data$.user.posts.userPosts
+                            if(userPosts.includes(',')) {
+                                const posts = userPosts.split(',')
+                                posts.forEach((e) => {
+                                    this.postSercie.updatePostAvatar(e, data$.data!).subscribe()
+                                })
+                            } else {
+                                this.postSercie.updatePostAvatar(userPosts, data$.data).subscribe()
+                            }
+                            
+                        }
                     }),
                     map((data) => {
                         this.setLoading(false)

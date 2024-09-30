@@ -30,12 +30,12 @@ export class ChangeProfileComponent implements OnInit {
     'assets/images/boy.png',
     'assets/images/cat.png',
     'assets/images/gamer.png',
-    'assets/images/man (1).png',
-    'assets/images/man (2).png',
-    'assets/images/man (3).png',
-    'assets/images/man (4).png',
+    'assets/images/man-1.png',
+    'assets/images/man-2.png',
+    'assets/images/man-3.png',
+    'assets/images/man-4.png',
     'assets/images/man.png',
-    'assets/images/woman (1).png',
+    'assets/images/woman-1.png',
     'assets/images/woman.png',
   ];
   selectedImage:string = ''

@@ -12,7 +12,7 @@ export const updateGuard: CanActivateFn = (route, state) => {
   let user = localStorage.getItem('User')
   if(user) {
   } else {
-    store.dispatch(loginActions.faliure({error: 'Login in order to access the Page'}))
+    store.dispatch(loginActions.faliure({error: 'Login in order to access the page'}))
     errorRemover.cleareError()
     return router.navigateByUrl(redirectUrl).then(() => false)
   }
