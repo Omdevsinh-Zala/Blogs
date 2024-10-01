@@ -35,6 +35,8 @@ import { PreviewComponent } from './dialogbox/preview/preview.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatRippleModule} from '@angular/material/core';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { injectSpeedInsights } from '@vercel/speed-insights'
+injectSpeedInsights();
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ForgetPasswordComponent,
     ChangeProfileComponent,
     CreateBlogComponent,
-    PreviewComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
   ],
   bootstrap: [AppComponent],
 })
