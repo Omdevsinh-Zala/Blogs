@@ -37,6 +37,7 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
     blog$ = this.select((state) => state.blog)
     blogUser$ = this.select((state) => state.blogUser)
     extraTitles$ = this.select((state) => state.titles)
+    private distroy = false
 
     private setLoading = this.updater((state, value:boolean) => ({...state, loading: value}))
     private setBlogs = this.updater((state, data:Posts) => ({...state, blog:data}))
@@ -53,26 +54,28 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
                     map((data) => {
                         onValue(data, (snashot) => {
                             const blogData:Posts[] = [snashot.val()]
-                            if(blogData[0] != null) {
-                                this.setBlogs(blogData[0])
-                                onValue(ref(this.db, `users/${blogData[0].userId}`), (snapshot) => {
-                                    const userData = [snapshot.val()]
-                                    if(userData[0] != null) {
-                                        this.setBlogUser(userData[0])
-                                        this.setLoading(false)
-                                        this.titles$('')
-                                    } else {
-                                        this.router.navigateByUrl('/Home');
-                                        this.clearError.cleareError();
-                                        this.store.dispatch(loginActions.faliure({error: 'User no longer exists'}))
-                                        this.setLoading(false)
-                                    }
-                                })
-                            } else {
-                                this.router.navigateByUrl('/Home');
-                                this.clearError.cleareError();
-                                this.store.dispatch(loginActions.faliure({error: 'Cannot access blog'}))
-                                this.setLoading(false)
+                            if(this.distroy == false) {
+                                if(blogData[0] != null) {
+                                    this.setBlogs(blogData[0])
+                                    onValue(ref(this.db, `users/${blogData[0].userId}`), (snapshot) => {
+                                        const userData = [snapshot.val()]
+                                        if(userData[0] != null) {
+                                            this.setBlogUser(userData[0])
+                                            this.setLoading(false)
+                                            this.titles$('')
+                                        } else {
+                                            this.router.navigateByUrl('/Home');
+                                            this.clearError.cleareError();
+                                            this.store.dispatch(loginActions.faliure({error: 'User no longer exists'}))
+                                            this.setLoading(false)
+                                        }
+                                    })
+                                } else {
+                                    this.router.navigateByUrl('/Home');
+                                    this.clearError.cleareError();
+                                    this.store.dispatch(loginActions.faliure({error: 'Cannot access blog'}))
+                                    this.setLoading(false)
+                                }
                             }
                         })
                     })
@@ -102,4 +105,8 @@ export class BlogPageStore extends ComponentStore<Initialstate> {
             })
         )
     })
+
+    destroy() {
+        this.distroy = true
+    }
 }

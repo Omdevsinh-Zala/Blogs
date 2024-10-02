@@ -49,5 +49,6 @@ export class BlogPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSub.unsubscribe()
+    this.store.destroy()
   }
 }
