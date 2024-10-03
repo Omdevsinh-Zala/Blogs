@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { SocilaLinks, Users } from '../../models/users';
@@ -117,7 +117,6 @@ export class ChangeProfileComponent implements OnInit {
       workEmail: this.userProfile.getRawValue().workEmail?.trim()!,
       socialLinks: socialLinks,
     };
-
     if(this.selectedImage) {
       userData = {
         ...userData,
@@ -137,8 +136,8 @@ export class ChangeProfileComponent implements OnInit {
       this.error.cleareError();
     }
   }
-
   showImages() {
+    console.log('1')
     this.options = !this.options
   }
 
