@@ -47,6 +47,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-width: 1680px;
   display: block;
   margin: 0 auto;
+  padding: 0 15px;
+  @media(max-width: 767px) {
+    padding: 0 5px;
+  }
 }
 .btn {
   display: block;

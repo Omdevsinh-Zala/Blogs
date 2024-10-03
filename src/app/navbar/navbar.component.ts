@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   blogTitles$ = this.store.titles$
   url: string = '';
+  showOpt:boolean = false
 
   showOptions() {
     this.hideProfile();
