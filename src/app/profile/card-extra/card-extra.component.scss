@@ -26,6 +26,9 @@
                 list-style: none;
                 gap: 20px;
                 padding: 12px;
+                @media(max-width: 991px) {
+                    flex-direction: row;
+                }
             }
         }
     }
